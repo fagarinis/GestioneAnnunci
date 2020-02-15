@@ -4,7 +4,7 @@
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
-<title>Ricerca Utente</title>
+<title>Area Admin: Ricerca Utente</title>
 </head>
 <body>
 
@@ -14,14 +14,14 @@
    
       
     <div class="page-header">
-	  <h3>Pagina di Ricerca Utente</h3>
+	  <h3>Area Admin: Pagina di Ricerca Utente</h3>
 	</div>
 	
 	<div class="alert alert-success ${messaggioConferma==null?'d-none':''}" role="alert">
 	  ${messaggioConferma }
 	</div>
 
-      	<form class="form-horizontal" action="${pageContext.request.contextPath}/admin/ExecuteSearchUtenteServlet" method="post">
+      	<form class="form-horizontal" action="${pageContext.request.contextPath}/admin/gestioneutenti/ExecuteSearchUtenteServlet" method="post">
       		<div class="form-group">
       			<label class="control-label col-sm-2" for="nomeInputId">Nome:</label>
 	    		<div class="col-sm-4">
@@ -38,6 +38,12 @@
       			<label class="control-label col-sm-2" for="usernameInputId">Username:</label>
 	    		<div class="col-sm-4">
 					<input class="form-control" type="text" id="usernameInputId" name="usernameInput" >
+			 	</div>
+  			</div>
+  			<div class="form-group">
+      			<label class="control-label col-sm-2" for="emailInputId">Email:</label>
+	    		<div class="col-sm-4">
+					<input class="form-control" type="text" id="emailInputId" name="emailInput" >
 			 	</div>
   			</div>
   			<div class="form-group">
@@ -58,14 +64,16 @@
   			<div class="form-group">        
 		      <div class="col-sm-offset-2 col-sm-10">
 		        <button type="submit" class="btn btn-primary btn-md">Effettua Ricerca</button>
-		        <a href="${pageContext.request.contextPath}/admin/PrepareInsertUtenteServlet" class="btn btn-primary btn-md">Inserisci Nuovo Utente</a>
+		        <!-- Inserisci nuovo Utente -->
+		        <a href="${pageContext.request.contextPath}/admin/gestioneutenti/PrepareInsertUtenteServlet" class="btn btn-primary btn-md">Inserisci Nuovo Utente</a>
 		      </div>
 		    </div>
 		</form>
 		
 		
-		<%@ include file="../../footer.jsp"%>
+		
     </div><!-- /.container -->
+    <%@ include file="../../footer.jsp"%>
 
 
 

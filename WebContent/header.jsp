@@ -46,7 +46,7 @@
           
            <c:if test="${userInfo.isAdmin()}">
           <li class="nav-item">
-            <a class="nav-link text-danger" href="${pageContext.request.contextPath}/admin/gestioneutenti/search.jsp">Area Admin</a>
+            <a class="nav-link text-danger" href="${pageContext.request.contextPath}/admin/gestioneutenti/PrepareSearchUtenteServlet">Area Admin</a>
           </li>
           </c:if>
           

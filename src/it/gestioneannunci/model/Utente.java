@@ -126,6 +126,15 @@ public class Utente {
 		this.stato = stato;
 	}
 
+	public void setStato(String stato) {
+		try {
+			this.setStato(StatoUtente.valueOf(stato));
+
+		} catch (Exception e) {
+			this.stato = null;
+		}
+	}
+
 	public Set<Ruolo> getRuoli() {
 		return ruoli;
 	}
@@ -164,7 +173,7 @@ public class Utente {
 		this.acquisti.add(acquisto);
 		acquisto.setUtente(this);
 	}
-	
+
 	public boolean isAdmin() {
 		for (Ruolo ruolo : ruoli) {
 			if (ruolo.getId() == Ruolo.ADMIN_ID)

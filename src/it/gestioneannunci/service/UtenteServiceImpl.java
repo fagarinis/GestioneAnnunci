@@ -76,13 +76,22 @@ public class UtenteServiceImpl implements UtenteService {
 	@Transactional
 	@Override
 	public void aggiornaUtenteConRuoli(Utente utenteModel, List<String> listaIdRuoli) {
-		utenteModel.getRuoli().clear();
+		Utente utenteUpdate = utenteDAO.get(utenteModel.getId());
+		utenteUpdate.setNome(utenteModel.getNome());
+		utenteUpdate.setCognome(utenteModel.getCognome());
+		utenteUpdate.setUsername(utenteModel.getUsername());
+		utenteUpdate.setPassword(utenteModel.getPassword());
+		utenteUpdate.setEmail(utenteModel.getEmail());
+		utenteUpdate.setCreditoResiduo(utenteModel.getCreditoResiduo());
+		utenteUpdate.setStato(utenteModel.getStato());
+		
+		utenteUpdate.getRuoli().clear();
 		for (String idRuolo : listaIdRuoli) {
 			Ruolo ruoloDaAggiungere = ruoloDAO.get(Long.parseLong(idRuolo));
 			if (ruoloDaAggiungere != null)
-				utenteModel.addRuolo(ruoloDaAggiungere);
+				utenteUpdate.addRuolo(ruoloDaAggiungere);
 		}
-		utenteDAO.update(utenteModel);
+		utenteDAO.update(utenteUpdate);
 	}
 
 	@Transactional
@@ -94,9 +103,28 @@ public class UtenteServiceImpl implements UtenteService {
 		utenteInstance.addRuolo(new Ruolo(idUtenteClassico));
 	}
 
+	@Transactional(readOnly = true)
 	@Override
 	public boolean isUsernameDiponibile(String username) {
-		return utenteDAO.isUsernameAvailable(username);
+		return utenteDAO.findByUsername(username) == null;
+	}
+	
+	@Transactional(readOnly = true)
+	@Override
+	public Utente cercaDaUsername(String username) {
+		return utenteDAO.findByUsername(username);
+	}
+
+	@Transactional(readOnly = true)
+	@Override
+	public List<Utente> listAllEager() {
+		return utenteDAO.listEager();
+	}
+
+	@Transactional(readOnly = true)
+	@Override
+	public List<Utente> findByExampleEager(Utente example) {
+		return utenteDAO.findByExampleEager(example);
 	}
 
 }

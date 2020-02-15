@@ -29,8 +29,18 @@
 				<dd class="col-sm-9">${utenteAttr.username }</dd>
 			</dl>
 			<dl class="row">
+				<dt class="col-sm-3 text-right">Email</dt>
+				<dd class="col-sm-9">${utenteAttr.email }</dd>
+			</dl>
+			
+			<dl class="row">
+				<dt class="col-sm-3 text-right">Credito Residuo</dt>
+				<dd class="col-sm-9">${utenteAttr.creditoResiduo } &euro;</dd>
+			</dl>
+			
+			<dl class="row">
 				<dt class="col-sm-3 text-right">Data Registrazione</dt>
-				<dd class="col-sm-9">${utenteAttr.dataRegistrazione }</dd>
+				<dd class="col-sm-9">${utenteAttr.dataCreazione }</dd>
 			</dl>
 			<dl class="row">
 				<dt class="col-sm-3 text-right">Stato</dt>
@@ -52,12 +62,12 @@
 
 
 
-			<a href="javascript:history.back()" class="btn btn-primary btn-md">Torna
-				Indietro</a>
-
-			<%@ include file="../../footer.jsp"%>
+			<a href="javascript:history.back()" class="btn btn-primary btn-md">Torna Indietro</a>
+			
 		</div>
+		
 	</div>
+	<%@ include file="../../footer.jsp"%>
 
 </body>
 </html>

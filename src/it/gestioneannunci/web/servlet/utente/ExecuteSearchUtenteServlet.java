@@ -2,7 +2,6 @@ package it.gestioneannunci.web.servlet.utente;
 
 import java.io.IOException;
 
-import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletConfig;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -13,13 +12,15 @@ import javax.servlet.http.HttpServletResponse;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.context.support.SpringBeanAutowiringSupport;
 
+import it.gestioneannunci.model.Utente;
+import it.gestioneannunci.model.enumeration.StatoUtente;
 import it.gestioneannunci.service.UtenteService;
 
 /**
- * Servlet implementation class ExecuteInsertUtenteServlet
+ * Servlet implementation class ExecuteSearchUtenteServlet
  */
-@WebServlet("/admin/gestioneutenti/ExecuteInsertUtenteServlet")
-public class ExecuteInsertUtenteServlet extends HttpServlet {
+@WebServlet("/admin/gestioneutenti/ExecuteSearchUtenteServlet")
+public class ExecuteSearchUtenteServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 
 	@Autowired
@@ -34,7 +35,7 @@ public class ExecuteInsertUtenteServlet extends HttpServlet {
 	/**
 	 * @see HttpServlet#HttpServlet()
 	 */
-	public ExecuteInsertUtenteServlet() {
+	public ExecuteSearchUtenteServlet() {
 		super();
 	}
 
@@ -44,7 +45,8 @@ public class ExecuteInsertUtenteServlet extends HttpServlet {
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
-
+		// TODO Auto-generated method stub
+		response.getWriter().append("Served at: ").append(request.getContextPath());
 	}
 
 	/**
@@ -53,9 +55,21 @@ public class ExecuteInsertUtenteServlet extends HttpServlet {
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
-		
-		
+		String nomeInput = request.getParameter("nomeInput");
+		String cognomeInput = request.getParameter("cognomeInput");
+		String usernameInput = request.getParameter("usernameInput");
+		String emailInput = request.getParameter("emailInput");
+		String statoInput = request.getParameter("statoInput");
 
+		Utente utenteExample = new Utente();
+		utenteExample.setNome(nomeInput);
+		utenteExample.setCognome(cognomeInput);
+		utenteExample.setUsername(usernameInput);
+		utenteExample.setEmail(emailInput);
+		utenteExample.setStato(statoInput);
+
+		request.setAttribute("listaUtentiAttr", utenteService.findByExampleEager(utenteExample));
+		request.getRequestDispatcher("/admin/gestioneutenti/result.jsp").forward(request, response);
 	}
 
 }

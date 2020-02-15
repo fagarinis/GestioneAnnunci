@@ -1,40 +1,25 @@
 package it.gestioneannunci.web.servlet.utente;
 
 import java.io.IOException;
-
-import javax.servlet.RequestDispatcher;
-import javax.servlet.ServletConfig;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.context.support.SpringBeanAutowiringSupport;
-
-import it.gestioneannunci.service.UtenteService;
+import it.gestioneannunci.model.enumeration.StatoUtente;
 
 /**
- * Servlet implementation class ExecuteInsertUtenteServlet
+ * Servlet implementation class PrepareSearchUtenteServlet
  */
-@WebServlet("/admin/gestioneutenti/ExecuteInsertUtenteServlet")
-public class ExecuteInsertUtenteServlet extends HttpServlet {
+@WebServlet("/admin/gestioneutenti/PrepareSearchUtenteServlet")
+public class PrepareSearchUtenteServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
-
-	@Autowired
-	private UtenteService utenteService;
-
-	@Override
-	public void init(ServletConfig config) throws ServletException {
-		super.init(config);
-		SpringBeanAutowiringSupport.processInjectionBasedOnCurrentContext(this);
-	}
 
 	/**
 	 * @see HttpServlet#HttpServlet()
 	 */
-	public ExecuteInsertUtenteServlet() {
+	public PrepareSearchUtenteServlet() {
 		super();
 	}
 
@@ -44,7 +29,8 @@ public class ExecuteInsertUtenteServlet extends HttpServlet {
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
-
+		request.setAttribute("statiListAttr", StatoUtente.values());
+		request.getRequestDispatcher("/admin/gestioneutenti/search.jsp").forward(request, response);
 	}
 
 	/**
@@ -53,9 +39,6 @@ public class ExecuteInsertUtenteServlet extends HttpServlet {
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
-		
-		
-
 	}
 
 }

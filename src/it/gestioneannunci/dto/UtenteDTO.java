@@ -94,14 +94,21 @@ public class UtenteDTO {
 		this.creditoResiduo = creditoResiduo;
 	}
 
-	
-
 	public StatoUtente getStato() {
 		return stato;
 	}
 
 	public void setStato(StatoUtente stato) {
 		this.stato = stato;
+	}
+
+	public void setStato(String stato) {
+		try {
+			this.setStato(StatoUtente.valueOf(stato));
+
+		} catch (Exception e) {
+			this.stato = null;
+		}
 	}
 
 	public Set<Ruolo> getRuoli() {
@@ -131,14 +138,13 @@ public class UtenteDTO {
 		if (StringUtils.isBlank(this.username)) {
 			result.add("il campo Username non può essere vuoto");
 		}
-		
+
 		if (StringUtils.isBlank(this.password)) {
 			result.add("il campo Password non può essere vuoto");
-		}
-		else if(!password.equals(confermaPassword)) {
+		} else if (!password.equals(confermaPassword)) {
 			result.add("conferma password diverse");
 		}
-		
+
 		if (StringUtils.isBlank(this.email)) {
 			result.add("il campo Email non può essere vuoto");
 		} else if (!this.email.matches(

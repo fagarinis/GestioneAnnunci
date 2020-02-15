@@ -46,7 +46,7 @@ public class RuoloServiceImpl implements RuoloService {
 		ruoloDAO.delete(o);
 	}
 
-	@Transactional
+	@Transactional(readOnly = true)
 	@Override
 	public List<Ruolo> findByExample(Ruolo example) {
 		return ruoloDAO.findByExample(example);

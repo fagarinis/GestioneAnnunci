@@ -29,17 +29,33 @@
 			<thead>
 				<tr>
 					<th>Username</th>
+					<th>Nome</th>
+					<th>Cognome</th>
 					<th>Action</th>
 				</tr>
 			</thead>
 			<tbody>
 				<c:forEach var="utenteItem" items="${listaUtentiAttr }">
 					<tr>
-						<td><i>${utenteItem.username }</i></td>
+						<td><c:if test="${utenteItem.isAdmin()}"><font color ="red">&#60A&#62</font></c:if>
+						<c:if test="${utenteItem.getStato() == 'CREATO'}">
+							<i>${utenteItem.username }</i>
+						</c:if>
+						<c:if test="${utenteItem.getStato() == 'DISABILITATO'}">
+							<del>${utenteItem.username }</del>
+						</c:if>
+						<c:if test="${utenteItem.getStato() == 'ATTIVO'}">
+							${utenteItem.username }
+						</c:if>
+						
+						
+						</td>
+						<td>${utenteItem.nome }</td>
+						<td>${utenteItem.cognome }</td>
 						<td><a
-							href="${pageContext.request.contextPath}/admin/ExecuteDettaglioUtenteServlet?idUtente=${utenteItem.id}"
+							href="${pageContext.request.contextPath}/admin/gestioneutenti/ExecuteDettaglioUtenteServlet?idUtente=${utenteItem.id}"
 							class="btn btn-info">Dettaglio</a> <a
-							href="${pageContext.request.contextPath}/admin/PrepareModificaUtenteServlet?idUtente=${utenteItem.id}"
+							href="${pageContext.request.contextPath}/admin/gestioneutenti/PrepareModificaUtenteServlet?idUtente=${utenteItem.id}"
 							class="btn btn-info">Modifica</a> 
 					</tr>
 				</c:forEach>
@@ -54,8 +70,9 @@
 			</div>
 		</div>
 
-		<%@ include file="../../footer.jsp"%>
+		
 
 	</div>
+	<%@ include file="../../footer.jsp"%>
 </body>
 </html>

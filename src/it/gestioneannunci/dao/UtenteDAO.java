@@ -12,6 +12,10 @@ public interface UtenteDAO extends IBaseDAO<Utente> {
 
 	public void updateUserWithRoles(Utente utenteModel, List<String> listaIdRuoli);
 
-	public boolean isUsernameAvailable(String username);
+	public List<Utente> listEager();
+
+	public List<Utente> findByExampleEager(Utente example);
+
+	Utente findByUsername(String username);
 
 }

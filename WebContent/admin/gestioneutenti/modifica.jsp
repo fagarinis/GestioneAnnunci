@@ -28,7 +28,7 @@
 	</div>
 
 
-      	<form class="form-horizontal" action="${pageContext.request.contextPath}/admin/ExecuteModificaUtenteServlet" method="post">
+      	<form class="form-horizontal" action="${pageContext.request.contextPath}/admin/gestioneutenti/ExecuteModificaUtenteServlet" method="post">
       		<input class="form-control" type="hidden" id="idInputId" name="idInput" 
 					value = "${utenteAttr.id}">
       		
@@ -59,6 +59,14 @@
 	    		<div class="col-sm-4">
 					<input class="form-control" type="password" id="passwordInputId" name="passwordInput" 
 					value = "${utenteAttr.password}">
+			 	</div>
+  			</div>
+  			
+  			<div class="form-group">
+      			<label class="control-label col-sm-2" for="emailInputId">Email:</label>
+	    		<div class="col-sm-4">
+					<input class="form-control" type="text" id="emailInputId" name="emailInput" 
+					value = "${utenteAttr.email}">
 			 	</div>
   			</div>
   			
@@ -94,12 +102,14 @@
   			
   			<div class="form-group">        
 		      <div class="col-sm-offset-2 col-sm-10">
-		        <button type="submit" class="btn btn-primary btn-md">Conferma</button>
+		        <button type="submit" class="btn btn-primary btn-md">Conferma Modifiche</button>
 		      </div>
 		    </div>
 		</form>
-		<%@ include file="../../footer.jsp"%>
+		
     </div><!-- /.container -->
+    
+    <%@ include file="../../footer.jsp"%>
 
 
 

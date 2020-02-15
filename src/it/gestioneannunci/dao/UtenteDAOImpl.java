@@ -1,5 +1,6 @@
 package it.gestioneannunci.dao;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import javax.persistence.EntityManager;
@@ -107,9 +108,49 @@ public class UtenteDAOImpl implements UtenteDAO {
 	}
 
 	@Override
-	public boolean isUsernameAvailable(String username) {
-		List<Utente> result = entityManager.createQuery("from Utente u where u.username ='"+ username+"'", Utente.class).getResultList();
-		return result.size() == 0;
+	public Utente findByUsername(String username) {
+		try {
+			return entityManager.createQuery("from Utente u where u.username ='" + username + "'", Utente.class)
+					.getSingleResult();
+
+		} catch (Exception e) {
+			return null;
+		}
+
+	}
+
+	@Override
+	public List<Utente> findByExampleEager(Utente example) {
+		List<Utente> result = new ArrayList<>();
+		if (example == null) {
+			return result;
+		}
+
+		String query = "Select distinct u From Utente u left join fetch u.ruoli r where 1=1 ";
+		if (example.getNome() != null && example.getNome() != "") {
+			query += " and u.nome = '" + example.getNome() + "'";
+		}
+		if (example.getCognome() != null && example.getCognome() != "") {
+			query += " and u.cognome = '" + example.getCognome() + "'";
+		}
+		if (example.getUsername() != null && example.getUsername() != "") {
+			query += " and u.username = '" + example.getUsername() + "'";
+		}
+		if (example.getEmail() != null && example.getEmail() != "") {
+			query += " and u.email = '" + example.getEmail() + "'";
+		}
+		if (example.getStato() != null) {
+			query += " and u.stato = '" + example.getStato() + "'";
+		}
+
+		result = entityManager.createQuery(query, Utente.class).getResultList();
+		return result;
+	}
+
+	@Override
+	public List<Utente> listEager() {
+		return entityManager.createQuery("Select distinct u From Utente u left join fetch u.ruoli r",
+				Utente.class).getResultList();
 	}
 
 }

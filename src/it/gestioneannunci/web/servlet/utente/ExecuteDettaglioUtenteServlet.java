@@ -2,7 +2,6 @@ package it.gestioneannunci.web.servlet.utente;
 
 import java.io.IOException;
 
-import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletConfig;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -16,10 +15,10 @@ import org.springframework.web.context.support.SpringBeanAutowiringSupport;
 import it.gestioneannunci.service.UtenteService;
 
 /**
- * Servlet implementation class ExecuteInsertUtenteServlet
+ * Servlet implementation class ExecuteDettaglioUtenteServlet
  */
-@WebServlet("/admin/gestioneutenti/ExecuteInsertUtenteServlet")
-public class ExecuteInsertUtenteServlet extends HttpServlet {
+@WebServlet("/admin/gestioneutenti/ExecuteDettaglioUtenteServlet")
+public class ExecuteDettaglioUtenteServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 
 	@Autowired
@@ -34,7 +33,7 @@ public class ExecuteInsertUtenteServlet extends HttpServlet {
 	/**
 	 * @see HttpServlet#HttpServlet()
 	 */
-	public ExecuteInsertUtenteServlet() {
+	public ExecuteDettaglioUtenteServlet() {
 		super();
 	}
 
@@ -44,7 +43,9 @@ public class ExecuteInsertUtenteServlet extends HttpServlet {
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
-
+		String idUtenteDaPagina = request.getParameter("idUtente");
+		request.setAttribute("utenteAttr", utenteService.caricaSingoloUtenteEager(Long.parseLong(idUtenteDaPagina)));
+		request.getRequestDispatcher("/admin/gestioneutenti/dettaglio.jsp").forward(request, response);
 	}
 
 	/**
@@ -53,9 +54,6 @@ public class ExecuteInsertUtenteServlet extends HttpServlet {
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
-		
-		
-
 	}
 
 }
