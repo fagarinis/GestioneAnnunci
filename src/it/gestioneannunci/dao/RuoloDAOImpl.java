@@ -13,9 +13,11 @@ import org.hibernate.Session;
 import org.hibernate.criterion.Example;
 import org.hibernate.criterion.Example.PropertySelector;
 import org.hibernate.type.Type;
+import org.springframework.stereotype.Component;
 
 import it.gestioneannunci.model.Ruolo;
 
+@Component
 public class RuoloDAOImpl implements RuoloDAO {
 
 	@PersistenceContext

@@ -4,6 +4,11 @@
 <!-- Custom styles for this template -->
 <link href="<%= request.getContextPath() %>/css/shop-item.css" rel="stylesheet">
 
+<!-- JSTL librerie -->
+<%@ taglib uri = "http://java.sun.com/jsp/jstl/core" prefix = "c" %>
+
+
+
 <!-- Static navbar -->
 <!-- Navigation -->
   <nav class="navbar navbar-expand-lg navbar-dark bg-dark fixed-top">
@@ -23,18 +28,18 @@
         <ul class="navbar-nav ml-auto">
         
           <li class="nav-item active">
-            <a class="nav-link" href="#">Home
+            <a class="nav-link" href="${pageContext.request.contextPath}/HomeActionServlet">Home
               <span class="sr-only">(current)</span>
             </a>
           </li>
           <li class="nav-item">
-            <a class="nav-link" href="#">Log In</a>
+            <a class="nav-link" href="${pageContext.request.contextPath}/login.jsp">Accedi</a>
           </li>
           <li class="nav-item">
             <a class="nav-link" href="#">Registrati</a>
           </li>
           <li class="nav-item">
-            <a class="nav-link text-danger" href="#">Admin</a>
+            <a class="nav-link text-danger" href="#">Area Admin</a>
           </li>
           
         </ul>

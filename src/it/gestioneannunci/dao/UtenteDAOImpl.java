@@ -18,8 +18,6 @@ import it.gestioneannunci.model.Ruolo;
 import it.gestioneannunci.model.Utente;
 import it.gestioneannunci.model.enumeration.StatoUtente;
 
-
-
 @Component
 public class UtenteDAOImpl implements UtenteDAO {
 
@@ -69,7 +67,7 @@ public class UtenteDAOImpl implements UtenteDAO {
 				// Number
 				if (object instanceof Integer)
 					return ((Integer) object) != 0;
-				
+
 				return true;
 			}
 		};
@@ -81,8 +79,8 @@ public class UtenteDAOImpl implements UtenteDAO {
 
 	@Override
 	public Utente executeLogin(String username, String password) {
-		Query query = entityManager
-				.createQuery("select u FROM Utente u join fetch u.ruoli where u.username = :usernameParam and u.password= :passwordParam and u.stato=:statoUtenteParam");
+		Query query = entityManager.createQuery(
+				"select u FROM Utente u join fetch u.ruoli where u.username = :usernameParam and u.password= :passwordParam and u.stato=:statoUtenteParam");
 		query.setParameter("usernameParam", username);
 		query.setParameter("passwordParam", password);
 		query.setParameter("statoUtenteParam", StatoUtente.ATTIVO);
@@ -93,19 +91,20 @@ public class UtenteDAOImpl implements UtenteDAO {
 	@Override
 	public Utente getEager(long id) {
 		try {
-		return entityManager.createQuery("from Utente u left join fetch u.ruoli where u.id ="+id, Utente.class).getSingleResult();
-		} catch(Exception e) {
+			return entityManager.createQuery("from Utente u left join fetch u.ruoli where u.id =" + id, Utente.class)
+					.getSingleResult();
+		} catch (Exception e) {
 			return null;
 		}
 	}
-	
+
 	@Override
-	public void updateUserWithRoles(Utente utenteModel, List<String> listaIdRuoli ) {
+	public void updateUserWithRoles(Utente utenteModel, List<String> listaIdRuoli) {
 		utenteModel = entityManager.merge(utenteModel);
-		for(String idRuolo: listaIdRuoli) {
+		for (String idRuolo : listaIdRuoli) {
 			utenteModel.addRuolo(new Ruolo(Long.parseLong(idRuolo)));
 		}
-		
+
 	}
-	
+
 }

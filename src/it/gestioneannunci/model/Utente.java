@@ -164,5 +164,13 @@ public class Utente {
 		this.acquisti.add(acquisto);
 		acquisto.setUtente(this);
 	}
+	
+	public boolean isAdmin() {
+		for (Ruolo ruolo : ruoli) {
+			if (ruolo.getId() == 1)
+				return true;
+		}
+		return false;
+	}
 
 }
