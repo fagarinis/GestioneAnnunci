@@ -13,15 +13,10 @@
 <!-- Navigation -->
   <nav class="navbar navbar-expand-lg navbar-dark bg-dark fixed-top">
     <div class="container">
-      <a class="navbar-brand" href="#">Progetto Ebay</a>
+      <a class="navbar-brand" href="${pageContext.request.contextPath}/HomeActionServlet">Progetto Ebay</a>
       <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarResponsive" aria-controls="navbarResponsive" aria-expanded="false" aria-label="Toggle navigation">
         <span class="navbar-toggler-icon"></span>
-        
-        
-        
       </button>
-      
-     	
       
       <div class="collapse navbar-collapse" id="navbarResponsive">
        
@@ -32,12 +27,24 @@
               <span class="sr-only">(current)</span>
             </a>
           </li>
+          <c:if test="${userInfo==null}">
           <li class="nav-item">
             <a class="nav-link" href="${pageContext.request.contextPath}/login.jsp">Accedi</a>
           </li>
           <li class="nav-item">
-            <a class="nav-link" href="#">Registrati</a>
+            <a class="nav-link" href="${pageContext.request.contextPath}/registrazione.jsp">Registrati </a>
           </li>
+          </c:if>
+          <c:if test="${userInfo!=null}">
+           <li class="nav-item">
+            <a class ="nav-link"> Utente: ${userInfo.username } (${userInfo.nome } ${userInfo.cognome })</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="${pageContext.request.contextPath}/LogoutServlet">Logout </a>
+          </li>
+          </c:if>
+          
+           
           <li class="nav-item">
             <a class="nav-link text-danger" href="#">Area Admin</a>
           </li>

@@ -46,8 +46,7 @@ public class UtenteDAOImpl implements UtenteDAO {
 
 	@Override
 	public void delete(Utente o) {
-		// TODO Auto-generated method stub
-
+		entityManager.remove(entityManager.merge(o));
 	}
 
 	@SuppressWarnings("unchecked")
@@ -105,6 +104,12 @@ public class UtenteDAOImpl implements UtenteDAO {
 			utenteModel.addRuolo(new Ruolo(Long.parseLong(idRuolo)));
 		}
 
+	}
+
+	@Override
+	public boolean isUsernameAvailable(String username) {
+		List<Utente> result = entityManager.createQuery("from Utente u where u.username ='"+ username+"'", Utente.class).getResultList();
+		return result.size() == 0;
 	}
 
 }

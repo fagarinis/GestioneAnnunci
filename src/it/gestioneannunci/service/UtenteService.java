@@ -12,4 +12,8 @@ public interface UtenteService extends IBaseService<Utente> {
 
 	public void aggiornaUtenteConRuoli(Utente utenteModel, List<String> listaIdRuoli);
 
+	public void inserisciNuovoUtenteClassico(Utente utenteInstance);
+	
+	public boolean isUsernameDiponibile(String username);
+
 }

@@ -1,5 +1,6 @@
 package it.gestioneannunci.service;
 
+import java.util.Date;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -13,6 +14,8 @@ import it.gestioneannunci.model.Utente;
 
 @Service
 public class UtenteServiceImpl implements UtenteService {
+	
+	private static final Long idUtenteClassico = 2L;
 
 	@Autowired
 	private UtenteDAO utenteDAO;
@@ -41,6 +44,7 @@ public class UtenteServiceImpl implements UtenteService {
 	@Transactional
 	@Override
 	public void inserisciNuovo(Utente o) {
+		o.setDataCreazione(new Date());
 		utenteDAO.insert(o);
 	}
 
@@ -78,6 +82,19 @@ public class UtenteServiceImpl implements UtenteService {
 				utenteModel.addRuolo(ruoloDaAggiungere);
 		}
 		utenteDAO.update(utenteModel);
+	}
+
+	@Transactional
+	@Override
+	public void inserisciNuovoUtenteClassico(Utente utenteInstance) {
+		utenteInstance.setDataCreazione(new Date());
+		utenteDAO.insert(utenteInstance);
+		utenteInstance.addRuolo(new Ruolo(idUtenteClassico));
+	}
+
+	@Override
+	public boolean isUsernameDiponibile(String username) {
+		return utenteDAO.isUsernameAvailable(username);
 	}
 
 }
