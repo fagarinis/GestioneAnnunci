@@ -1,6 +1,7 @@
 package it.gestioneannunci.dto;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Date;
 import java.util.HashSet;
 import java.util.List;
@@ -127,6 +128,13 @@ public class UtenteDTO {
 		this.idRuoli = idRuoli;
 	}
 
+	public void setIdRuoli(String[] idRuoliInputChecked) {
+		if (idRuoliInputChecked == null) {
+			return;
+		}
+		this.setIdRuoli(Arrays.asList(idRuoliInputChecked));
+	}
+
 	public List<String> errors() {
 		List<String> result = new ArrayList<String>();
 		if (StringUtils.isBlank(this.nome)) {
@@ -143,6 +151,10 @@ public class UtenteDTO {
 			result.add("il campo Password non può essere vuoto");
 		} else if (!password.equals(confermaPassword)) {
 			result.add("conferma password diverse");
+		}
+
+		if (this.getCreditoResiduo() == null || this.getCreditoResiduo() < 0) {
+			result.add("il campo Credito Residuo non è valido");
 		}
 
 		if (StringUtils.isBlank(this.email)) {
@@ -171,6 +183,14 @@ public class UtenteDTO {
 		result.setStato(utenteDTO.getStato());
 
 		return result;
+	}
+
+	public void setCreditoResiduo(String creditoResiduoInput) {
+		try {
+			this.creditoResiduo = Double.parseDouble(creditoResiduoInput);
+		} catch (Exception e) {
+			this.creditoResiduo = null;
+		}
 	}
 
 }

@@ -68,6 +68,7 @@ public class ExecuteModificaUtenteServlet extends HttpServlet {
 		String emailInput = request.getParameter("emailInput");
 		String usernameInput = request.getParameter("usernameInput");
 		String passwordInput = request.getParameter("passwordInput");
+		String creditoResiduoInput = request.getParameter("creditoResiduoInput");
 		String[] idRuoliInputChecked = request.getParameterValues("ruoloInput");
 		String statoInput = request.getParameter("statoInput");
 
@@ -80,8 +81,9 @@ public class ExecuteModificaUtenteServlet extends HttpServlet {
 		utenteDTO.setUsername(usernameInput);
 		utenteDTO.setPassword(passwordInput);
 		utenteDTO.setConfermaPassword(passwordInput);
-		utenteDTO.setIdRuoli(Arrays.asList(idRuoliInputChecked));
+		utenteDTO.setIdRuoli(idRuoliInputChecked);
 		utenteDTO.setStato(statoInput);
+		utenteDTO.setCreditoResiduo(creditoResiduoInput);
 
 		// verifica se ci sono errori, in caso ritorna indietro
 		List<String> utenteErrors = utenteDTO.errors();
@@ -90,7 +92,7 @@ public class ExecuteModificaUtenteServlet extends HttpServlet {
 			utenteErrors.add("username non disponibile");
 		}
 		if (!utenteErrors.isEmpty()) {
-
+			utenteDTO.setRuoli(ruoloService.trovaDaListaId(utenteDTO.getIdRuoli()));
 			request.setAttribute("utenteAttr", utenteDTO);
 			request.setAttribute("utenteErrors", utenteErrors);
 			request.setAttribute("listaRuoliCheckedAttr", utenteDTO.getIdRuoli());

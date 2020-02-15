@@ -31,6 +31,7 @@
 					<th>Username</th>
 					<th>Nome</th>
 					<th>Cognome</th>
+					<th>Credito Residuo</th>
 					<th>Action</th>
 				</tr>
 			</thead>
@@ -52,6 +53,7 @@
 						</td>
 						<td>${utenteItem.nome }</td>
 						<td>${utenteItem.cognome }</td>
+						<td>${utenteItem.creditoResiduo } &euro;</td>
 						<td><a
 							href="${pageContext.request.contextPath}/admin/gestioneutenti/ExecuteDettaglioUtenteServlet?idUtente=${utenteItem.id}"
 							class="btn btn-info">Dettaglio</a> <a

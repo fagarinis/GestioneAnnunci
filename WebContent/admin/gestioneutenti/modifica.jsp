@@ -71,6 +71,14 @@
   			</div>
   			
   			<div class="form-group">
+      			<label class="control-label col-sm-2" for="creditoResiduoInputId">Credito Residuo:</label>
+	    		<div class="col-sm-4">
+					<input class="form-control" type="text" id="creditoResiduoInputId" name="creditoResiduoInput" 
+					value = "${utenteAttr.creditoResiduo}">
+			 	</div>
+  			</div>
+  			
+  			<div class="form-group">
       			<label class="control-label col-sm-2" for="statoInputId">Stato Utente:</label>
 	    		<div class="col-sm-4">
 					<select id="statoInputId" name ="statoInput">
@@ -85,6 +93,7 @@
   			<div class="form-group">
       			<label class="control-label col-sm-2" for="ruoliInputId">Ruoli:</label>
 	    		<div class="col-sm-4">
+	    		
 	    			<c:forEach var = "ruoloItem" items ="${ruoliListAttr}">
 	    				<c:forEach var ="utenteRuoloItem" items ="${utenteAttr.ruoli}">
 	    					<c:if test="${ruoloItem.id == utenteRuoloItem.id}">

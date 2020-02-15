@@ -1,5 +1,6 @@
 package it.gestioneannunci.service;
 
+import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
 
@@ -55,6 +56,10 @@ public class RuoloServiceImpl implements RuoloService {
 	@Transactional(readOnly = true)
 	@Override
 	public Set<Ruolo> trovaDaListaId(List<String> listaId) {
+		if(listaId == null) {
+			return new HashSet<>();
+		}
+		
 		return ruoloDAO.findByListOfIds(listaId);
 	}
 
