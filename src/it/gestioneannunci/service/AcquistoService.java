@@ -1,5 +1,7 @@
 package it.gestioneannunci.service;
 
-public interface AcquistoService {
+import it.gestioneannunci.model.Acquisto;
+
+public interface AcquistoService extends IBaseService<Acquisto> {
 
 }
