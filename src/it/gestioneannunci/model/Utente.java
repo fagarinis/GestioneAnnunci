@@ -38,7 +38,7 @@ public class Utente {
 	private String email;
 	@Column(name = "creditoresiduo")
 	private Double creditoResiduo;
-	@Temporal(TemporalType.DATE)
+	@Temporal(TemporalType.TIMESTAMP)
 	@Column(name = "datacreazione")
 	private Date dataCreazione;
 	@Enumerated(EnumType.STRING)
@@ -167,7 +167,7 @@ public class Utente {
 	
 	public boolean isAdmin() {
 		for (Ruolo ruolo : ruoli) {
-			if (ruolo.getId() == 1)
+			if (ruolo.getId() == Ruolo.ADMIN_ID)
 				return true;
 		}
 		return false;

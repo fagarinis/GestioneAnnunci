@@ -11,6 +11,7 @@ import it.gestioneannunci.dao.RuoloDAO;
 import it.gestioneannunci.dao.UtenteDAO;
 import it.gestioneannunci.model.Ruolo;
 import it.gestioneannunci.model.Utente;
+import it.gestioneannunci.model.enumeration.StatoUtente;
 
 @Service
 public class UtenteServiceImpl implements UtenteService {
@@ -88,6 +89,7 @@ public class UtenteServiceImpl implements UtenteService {
 	@Override
 	public void inserisciNuovoUtenteClassico(Utente utenteInstance) {
 		utenteInstance.setDataCreazione(new Date());
+		utenteInstance.setStato(StatoUtente.ATTIVO);
 		utenteDAO.insert(utenteInstance);
 		utenteInstance.addRuolo(new Ruolo(idUtenteClassico));
 	}

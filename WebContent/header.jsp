@@ -44,15 +44,27 @@
           </li>
           </c:if>
           
-           
+           <c:if test="${userInfo.isAdmin()}">
           <li class="nav-item">
-            <a class="nav-link text-danger" href="#">Area Admin</a>
+            <a class="nav-link text-danger" href="${pageContext.request.contextPath}/admin/gestioneutenti/search.jsp">Area Admin</a>
           </li>
+          </c:if>
           
         </ul>
+        
       </div>
+      
+      
+      
     </div>
+    
+    
+    
   </nav>
+  
+  	  <div class="alert alert-danger ${messaggioUtenteNonAbilitato==null?'d-none':''}" role="alert">
+	  ${messaggioUtenteNonAbilitato }
+	  </div>
 
 
 <!-- Bootstrap core JavaScript

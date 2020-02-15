@@ -16,6 +16,8 @@ import it.gestioneannunci.model.enumeration.CodiceRuolo;
 
 @Entity
 public class Ruolo {
+	
+	static final Long ADMIN_ID = 1L;
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)

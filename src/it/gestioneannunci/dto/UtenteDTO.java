@@ -22,7 +22,6 @@ public class UtenteDTO {
 	private String confermaPassword;
 	private String email;
 	private Double creditoResiduo = 0D;
-	private Date dataCreazione;
 	private StatoUtente stato = StatoUtente.CREATO;
 
 	private Set<Ruolo> ruoli = new HashSet<>();
@@ -95,13 +94,7 @@ public class UtenteDTO {
 		this.creditoResiduo = creditoResiduo;
 	}
 
-	public Date getDataCreazione() {
-		return dataCreazione;
-	}
-
-	public void setDataCreazione(Date dataCreazione) {
-		this.dataCreazione = dataCreazione;
-	}
+	
 
 	public StatoUtente getStato() {
 		return stato;

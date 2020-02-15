@@ -96,7 +96,7 @@ public class ExecuteRegistrazioneUtenteServlet extends HttpServlet {
 		utenteService.inserisciNuovoUtenteClassico(utenteInstance);
 
 		// vado in pagina con OK
-		request.setAttribute("messaggioConfermaRegistrazione", "Registrazione completata, ora effettua l'accesso per attivare l'account");
+		request.setAttribute("messaggioConfermaRegistrazione", "Registrazione completata, ora puoi effettuare l'accesso");
 		request.getRequestDispatcher("/login.jsp").forward(request, response);
 
 	}
