@@ -66,6 +66,13 @@ public class LoginServlet extends HttpServlet {
 		HttpSession session = request.getSession();
 		session.setAttribute("userInfo", utenteCheAccede);
 		
+		if(session.getAttribute("lastPathBeforeLogin")!=null) {
+			request.getRequestDispatcher((String) session.getAttribute("lastPathBeforeLogin")).forward(request, response);
+			session.removeAttribute("lastPathBeforeLogin");
+			return;
+		}
+		
+		
 		request.setAttribute("categorieAttr", categoriaService.listAll());
 		request.getRequestDispatcher("index.jsp").forward(request, response);
 	}

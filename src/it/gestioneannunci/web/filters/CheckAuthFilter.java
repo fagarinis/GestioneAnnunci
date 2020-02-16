@@ -10,6 +10,7 @@ import javax.servlet.ServletResponse;
 import javax.servlet.annotation.WebFilter;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 import it.gestioneannunci.model.Utente;
 
@@ -38,6 +39,11 @@ public class CheckAuthFilter implements Filter {
 
 		// prendo il path della request che sta passando in questo momento
 		String pathAttuale = httpRequest.getServletPath();
+		
+		if(isPathDeletingLastPathBeforeLogin(pathAttuale)) {
+			HttpSession session = ((HttpServletRequest) request).getSession();
+			session.removeAttribute("lastPathBeforeLogin");
+		};
 
 		// vediamo se il path risulta tra quelli 'liberi di passare'
 		boolean isInWhiteList = isPathInWhiteList(pathAttuale);
@@ -48,7 +54,14 @@ public class CheckAuthFilter implements Filter {
 			// intanto verifico se utente in sessione
 			if (utenteInSession == null) {
 				
-				httpResponse.sendRedirect(httpRequest.getContextPath());
+				//salvo l'ultimo path richiesto a cui serve la login per accedere
+				//e lo salvo in sessione per consumarlo dopo una login corretta
+				String lastPathBeforeLogin = pathAttuale;
+				HttpSession session = ((HttpServletRequest) request).getSession();
+				session.setAttribute("lastPathBeforeLogin", lastPathBeforeLogin);
+				
+				//se non e' in sessione lo rimando alla pagina login
+				httpResponse.sendRedirect(httpRequest.getContextPath()+"/login.jsp");
 				return;
 			}
 			// controllo che utente abbia ruolo admin se nel path risulta presente /admin/
@@ -84,6 +97,27 @@ public class CheckAuthFilter implements Filter {
 			}
 		}
 		return false;
+	}
+	/**
+	 * @return true se l'utente richiede una pagina che cancella la memorizzazione
+	 * del path richiesto dall'utente a cui serve una sessione attiva per entrare
+	 * ad esempio, cliccando su area riservata senza login, prova ad andare nell'area riservata
+	 * ma invece, viene salvato il path a cui stava andando l'utente fino a che il login 
+	 * ha succcesso. Se l'utente clicca su altri link, il path memorizzato viene cancellato
+	 */
+	private boolean isPathDeletingLastPathBeforeLogin(String path) {
+		if(path.contains("/js/") || path.contains("/css/")) {
+			return false;
+		}
+		if(path.contains("/login.jsp") || path.contains("/registrazione.jsp")) {
+			return false;
+		}
+		if(path.contains("/LoginServlet") || path.contains("/ExecuteRegistrazioneUtenteServlet")) {
+			return false;
+		}
+		
+		return true;
+		
 	}
 
 	public void destroy() {

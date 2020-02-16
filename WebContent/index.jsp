@@ -98,7 +98,7 @@
         <!-- /.card -->
         <p style="text-align:center;">
         <!-- Accedi all'Area Riservata -->
-        <a href="${pageContext.request.contextPath}/areariservata/home.jsp" class="btn btn-info">Area Riservata</a>
+        <a href="${pageContext.request.contextPath}/areariservata/home.jsp" class="btn btn-info">Area Riservata Utente</a>
         </p>
 		
       </div>
