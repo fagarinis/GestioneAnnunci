@@ -99,4 +99,22 @@ public class AnnuncioServiceImpl implements AnnuncioService {
 		return annuncioDAO.findAllByUtenteId(id);
 	}
 
+	@Transactional(readOnly = true)
+	@Override
+	public Annuncio caricaAnnuncioEager(Long id) {
+		return annuncioDAO.getEager(id);
+	}
+
+	@Transactional
+	@Override
+	public void rimuoviSeAnnuncioAperto(Annuncio o) {
+		if (o == null || o.getId() == null) {
+			return;
+		}
+
+		if (annuncioDAO.get(o.getId()).isAperto()) {
+			annuncioDAO.delete(o);
+		}
+	}
+
 }

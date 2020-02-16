@@ -1,5 +1,7 @@
 package it.gestioneannunci.model;
 
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.HashSet;
 import java.util.Set;
@@ -41,6 +43,13 @@ public class Annuncio {
 	@JoinTable(name = "annuncio_categoria", joinColumns = @JoinColumn(name = "annuncio_id", referencedColumnName = "ID"), inverseJoinColumns = @JoinColumn(name = "categoria_id", referencedColumnName = "ID"))
 	private Set<Categoria> categorie = new HashSet<>();
 
+	public Annuncio() {
+	}
+
+	public Annuncio(Long id) {
+		this.id = id;
+	}
+
 	public Long getId() {
 		return id;
 	}
@@ -77,6 +86,20 @@ public class Annuncio {
 		return dataInserimento;
 	}
 
+	public Date getDataInserimentoSimpleFormat() {
+		DateFormat formatter = new SimpleDateFormat("dd/MM/yyyy");
+		Date date = this.dataInserimento;
+		Date dateWithZeroTime = null;
+		try {
+			dateWithZeroTime = formatter.parse(formatter.format(date));
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+
+		return dateWithZeroTime;
+	}
+
 	public void setDataInserimento(Date dataInserimento) {
 		this.dataInserimento = dataInserimento;
 	}
@@ -96,7 +119,7 @@ public class Annuncio {
 	public void setCategorie(Set<Categoria> categorie) {
 		this.categorie = categorie;
 	}
-	
+
 	public void addCategoria(Categoria categoria) {
 		this.categorie.add(categoria);
 		categoria.getAnnunci().add(this);

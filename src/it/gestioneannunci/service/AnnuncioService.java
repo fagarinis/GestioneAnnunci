@@ -8,4 +8,8 @@ public interface AnnuncioService extends IBaseService<Annuncio> {
 	
 	public List<Annuncio> cercaTuttiDaUtenteId(Long id);
 
+	public Annuncio caricaAnnuncioEager(Long id);
+	
+	public void rimuoviSeAnnuncioAperto(Annuncio o);
+
 }

@@ -24,6 +24,11 @@
 		<div
 			class="alert alert-success ${messaggioConferma!=null?'':'d-none' }"
 			role="alert">${messaggioConferma }</div>
+			
+		<%-- alert errore --%>
+		<div
+			class="alert alert-danger ${messaggioErrore!=null?'':'d-none' }"
+			role="alert">${messaggioErrore }</div>
 
 		<table class="table table-striped">
 			<thead>
@@ -36,17 +41,18 @@
 			</thead>
 			<tbody>
 				<c:forEach var="annuncioItem" items="${listaAnnunciAttr }">
-					<tr>
+					<tr> 
 						<td>${annuncioItem.testoAnnuncio }</td>
 						<td>${annuncioItem.prezzo }</td>
 						<td>${annuncioItem.aperto? 'Aperto' : 'Chiuso' }</td>
+						
 						<td><a
-							href="${pageContext.request.contextPath}/areariservata/imieiannunci/ExecuteDettaglioAnnuncioServlet?idAnnuncio=${AnnuncioItem.id}"
+							href="${pageContext.request.contextPath}/areariservata/imieiannunci/ExecuteDettaglioAnnuncioServlet?idAnnuncio=${annuncioItem.id}"
 							class="btn btn-info">Visualizza</a> <a
-							href="${pageContext.request.contextPath}/areariservata/imieiannunci/PrepareModificaAnnuncioServlet?idAnnuncio=${AnnuncioItem.id}"
+							href="${pageContext.request.contextPath}/areariservata/imieiannunci/PrepareModificaAnnuncioServlet?idAnnuncio=${annuncioItem.id}"
 							class="btn btn-info">Modifica</a> 
 							<a
-							href="${pageContext.request.contextPath}/areariservata/imieiannunci/PrepareEliminaAnnuncioServlet?idAnnuncio=${AnnuncioItem.id}"
+							href="${pageContext.request.contextPath}/areariservata/imieiannunci/PrepareEliminaAnnuncioServlet?idAnnuncio=${annuncioItem.id}"
 							class="btn btn-info">Elimina</a> 
 					</tr>
 				</c:forEach>

@@ -14,10 +14,11 @@ import org.hibernate.type.Type;
 import org.springframework.stereotype.Component;
 
 import it.gestioneannunci.model.Annuncio;
+import it.gestioneannunci.model.Utente;
 
 @Component
 public class AnnuncioDAOImpl implements AnnuncioDAO {
-	
+
 	@PersistenceContext
 	private EntityManager em;
 
@@ -76,7 +77,17 @@ public class AnnuncioDAOImpl implements AnnuncioDAO {
 
 	@Override
 	public List<Annuncio> findAllByUtenteId(long id) {
-		return em.createQuery("From Annuncio a where a.utente.id ='"+id+"'" , Annuncio.class).getResultList();
+		return em.createQuery("From Annuncio a where a.utente.id ='" + id + "'", Annuncio.class).getResultList();
+	}
+
+	@Override
+	public Annuncio getEager(Long id) {
+		try {
+			return em.createQuery("from Annuncio a left join fetch a.categorie where a.id =" + id, Annuncio.class)
+					.getSingleResult();
+		} catch (Exception e) {
+			return null;
+		}
 	}
 
 }
