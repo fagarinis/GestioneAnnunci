@@ -13,7 +13,7 @@
 <!-- Navigation -->
   <nav class="navbar navbar-expand-lg navbar-dark bg-dark fixed-top">
     <div class="container">
-      <a class="navbar-brand" href="${pageContext.request.contextPath}/HomeActionServlet">Progetto Ebay</a>
+      <a class="navbar-brand" href="${pageContext.request.contextPath}/HomeActionServlet">Progetto Ebay &#9787;</a>
       <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarResponsive" aria-controls="navbarResponsive" aria-expanded="false" aria-label="Toggle navigation">
         <span class="navbar-toggler-icon"></span>
       </button>
@@ -23,16 +23,16 @@
         <ul class="navbar-nav ml-auto">
         
           <li class="nav-item active">
-            <a class="nav-link" href="${pageContext.request.contextPath}/HomeActionServlet">Home
+            <a class="nav-link" href="${pageContext.request.contextPath}/HomeActionServlet">&#8459;ome
               <span class="sr-only">(current)</span>
             </a>
           </li>
           <c:if test="${userInfo==null}">
           <li class="nav-item">
-            <a class="nav-link" href="${pageContext.request.contextPath}/login.jsp">Accedi</a>
+            <a class="nav-link" href="${pageContext.request.contextPath}/login.jsp">&#x27BE;Accedi</a>
           </li>
           <li class="nav-item">
-            <a class="nav-link" href="${pageContext.request.contextPath}/registrazione.jsp">Registrati </a>
+            <a class="nav-link" href="${pageContext.request.contextPath}/registrazione.jsp">&#8475;egistrati </a>
           </li>
           </c:if>
           <c:if test="${userInfo!=null}">
@@ -40,13 +40,13 @@
             <a class ="nav-link"> Utente: ${userInfo.username } (${userInfo.nome } ${userInfo.cognome })</a>
           </li>
           <li class="nav-item">
-            <a class="nav-link" href="${pageContext.request.contextPath}/LogoutServlet">Logout </a>
+            <a class="nav-link" href="${pageContext.request.contextPath}/LogoutServlet">&#9735;Logout </a>
           </li>
           </c:if>
           
            <c:if test="${userInfo.isAdmin()}">
           <li class="nav-item">
-            <a class="nav-link text-danger" href="${pageContext.request.contextPath}/admin/gestioneutenti/PrepareSearchUtenteServlet">Area Admin</a>
+            <a class="nav-link text-danger" href="${pageContext.request.contextPath}/admin/gestioneutenti/PrepareSearchUtenteServlet">&#9728;Area Admin</a>
           </li>
           </c:if>
           

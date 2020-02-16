@@ -41,7 +41,7 @@ public class PrepareInsertAnnuncioServlet extends HttpServlet {
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		
+
 		request.setAttribute("categorieListAttr", categoriaService.listAll());
 		request.getRequestDispatcher("/areariservata/imieiannunci/insert.jsp").forward(request, response);
 	}

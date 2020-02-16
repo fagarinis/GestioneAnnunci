@@ -29,7 +29,7 @@ public class Annuncio {
 	@Column(name = "testoannuncio")
 	private String testoAnnuncio;
 	private Double prezzo;
-	@Temporal(TemporalType.DATE)
+	@Temporal(TemporalType.TIMESTAMP)
 	@Column(name = "datainserimento")
 	private Date dataInserimento;
 
@@ -37,7 +37,7 @@ public class Annuncio {
 	@JoinColumn(name = "utente_id", nullable = false)
 	private Utente utente;
 
-	@ManyToMany(fetch = FetchType.LAZY, cascade = { CascadeType.MERGE })
+	@ManyToMany(fetch = FetchType.LAZY, cascade = { CascadeType.MERGE, CascadeType.PERSIST })
 	@JoinTable(name = "annuncio_categoria", joinColumns = @JoinColumn(name = "annuncio_id", referencedColumnName = "ID"), inverseJoinColumns = @JoinColumn(name = "categoria_id", referencedColumnName = "ID"))
 	private Set<Categoria> categorie = new HashSet<>();
 

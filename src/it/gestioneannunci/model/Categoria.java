@@ -21,6 +21,13 @@ public class Categoria {
 	@ManyToMany(fetch = FetchType.LAZY, mappedBy = "categorie")
 	private Set<Annuncio> annunci = new HashSet<>();
 
+	public Categoria() {
+	}
+
+	public Categoria(Long id) {
+		this.id = id;
+	}
+
 	public Long getId() {
 		return id;
 	}
