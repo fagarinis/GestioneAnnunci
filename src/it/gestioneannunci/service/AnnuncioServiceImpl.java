@@ -117,4 +117,44 @@ public class AnnuncioServiceImpl implements AnnuncioService {
 		}
 	}
 
+	@Transactional
+	@Override
+	public boolean aggiornaSeAperto(Annuncio o) {
+		if (o == null || o.getId() == null || o.getUtente() == null) {
+			return false;
+		}
+
+		if (!annuncioDAO.get(o.getId()).isAperto()) {
+			return false;
+		}
+
+		if (o.getCategorie() == null || o.getCategorie().size() == 0) {
+			return false;
+		}
+
+		// setto l'utente persistent da un utente transient che contiene
+		// almeno l'id
+		Utente utentePersistant = utenteDAO.get(o.getUtente().getId());
+
+		// setto l'utente persistant
+		o.setUtente(utentePersistant);
+
+		// creo un set di categorie persistant da un set di categorie
+		// transient che contengono almeno l'id
+		Set<Categoria> categoriePersistant = new HashSet<>();
+		for (Categoria categoria : o.getCategorie()) {
+			Categoria categoriaPersistant = categoriaDAO.get(categoria.getId());
+			categoriaPersistant.getAnnunci().add(o);
+			categoriePersistant.add(categoriaPersistant);
+		}
+		// setto le categorie persistant
+		o.setCategorie(categoriePersistant);
+
+		// inserisco infine l'annuncio e lo faccio diventare persistant con
+		// i vari collegamenti
+		o.setDataInserimento(annuncioDAO.get(o.getId()).getDataInserimento());
+		annuncioDAO.update(o);
+		return true;
+	}
+
 }

@@ -1,8 +1,6 @@
 package it.gestioneannunci.web.servlet.login;
 
 import java.io.IOException;
-import java.util.Arrays;
-import java.util.Date;
 import java.util.List;
 
 import javax.servlet.ServletConfig;
@@ -17,7 +15,6 @@ import org.springframework.web.context.support.SpringBeanAutowiringSupport;
 
 import it.gestioneannunci.dto.UtenteDTO;
 import it.gestioneannunci.model.Utente;
-import it.gestioneannunci.service.RuoloService;
 import it.gestioneannunci.service.UtenteService;
 
 /**
@@ -29,9 +26,6 @@ public class ExecuteRegistrazioneUtenteServlet extends HttpServlet {
 
 	@Autowired
 	private UtenteService utenteService;
-
-	@Autowired
-	private RuoloService ruoloService;
 
 	@Override
 	public void init(ServletConfig config) throws ServletException {
@@ -80,14 +74,14 @@ public class ExecuteRegistrazioneUtenteServlet extends HttpServlet {
 
 		// verifica se ci sono errori, in caso ritorna indietro
 		List<String> utenteErrors = utenteDTO.errors();
-		if(!utenteService.isUsernameDiponibile(utenteDTO.getUsername())) {
+		if (!utenteService.isUsernameDiponibile(utenteDTO.getUsername())) {
 			utenteErrors.add("username non disponibile");
 		}
-		
+
 		if (utenteService.cercaDaEmail(utenteDTO.getEmail()) != null) {
 			utenteErrors.add("L'email inserita è già in uso da un altro account");
 		}
-		
+
 		if (!utenteErrors.isEmpty()) {
 			request.setAttribute("utenteAttr", utenteDTO);
 			request.setAttribute("utenteErrors", utenteErrors);
@@ -100,7 +94,8 @@ public class ExecuteRegistrazioneUtenteServlet extends HttpServlet {
 		utenteService.inserisciNuovoUtenteClassico(utenteInstance);
 
 		// vado in pagina con OK
-		request.setAttribute("messaggioConfermaRegistrazione", "Registrazione completata, ora puoi effettuare l'accesso");
+		request.setAttribute("messaggioConfermaRegistrazione",
+				"Registrazione completata, ora puoi effettuare l'accesso");
 		request.getRequestDispatcher("/login.jsp").forward(request, response);
 
 	}

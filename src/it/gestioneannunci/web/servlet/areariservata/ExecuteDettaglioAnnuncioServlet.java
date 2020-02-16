@@ -13,7 +13,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.context.support.SpringBeanAutowiringSupport;
 
 import it.gestioneannunci.service.AnnuncioService;
-import it.gestioneannunci.service.CategoriaService;
 
 /**
  * Servlet implementation class ExecuteDettaglioAnnuncioServlet

@@ -20,10 +20,10 @@ import it.gestioneannunci.service.AnnuncioService;
 import it.gestioneannunci.service.CategoriaService;
 
 /**
- * Servlet implementation class ExecuteInsertAnnuncioServlet
+ * Servlet implementation class ExecuteModificaAnnuncioServlet
  */
-@WebServlet("/areariservata/imieiannunci/ExecuteInsertAnnuncioServlet")
-public class ExecuteInsertAnnuncioServlet extends HttpServlet {
+@WebServlet("/areariservata/imieiannunci/ExecuteModificaAnnuncioServlet")
+public class ExecuteModificaAnnuncioServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 
 	@Autowired
@@ -41,7 +41,7 @@ public class ExecuteInsertAnnuncioServlet extends HttpServlet {
 	/**
 	 * @see HttpServlet#HttpServlet()
 	 */
-	public ExecuteInsertAnnuncioServlet() {
+	public ExecuteModificaAnnuncioServlet() {
 		super();
 	}
 
@@ -60,6 +60,7 @@ public class ExecuteInsertAnnuncioServlet extends HttpServlet {
 	protected void doPost(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
 		// binding
+		String idInput = request.getParameter("idInput");
 		String testoAnnuncioInput = request.getParameter("testoAnnuncioInput");
 		String prezzoInput = request.getParameter("prezzoInput");
 		String[] idCategorieInputChecked = request.getParameterValues("categoriaInput");
@@ -69,6 +70,7 @@ public class ExecuteInsertAnnuncioServlet extends HttpServlet {
 		Utente utenteInSessione = (Utente) httpRequest.getSession().getAttribute("userInfo");
 
 		AnnuncioDTO annuncioDTO = new AnnuncioDTO();
+		annuncioDTO.setId(Long.parseLong(idInput));
 		annuncioDTO.setTestoAnnuncio(testoAnnuncioInput);
 		annuncioDTO.setPrezzo(prezzoInput);
 		annuncioDTO.setUtente(utenteInSessione);
@@ -82,17 +84,23 @@ public class ExecuteInsertAnnuncioServlet extends HttpServlet {
 			request.setAttribute("annuncioAttr", annuncioDTO);
 			request.setAttribute("annuncioErrors", annuncioErrors);
 			request.setAttribute("categorieListAttr", categoriaService.listAll());
-			request.getRequestDispatcher("/areariservata/imieiannunci/insert.jsp").forward(request, response);
+			request.getRequestDispatcher("/areariservata/imieiannunci/modifica.jsp").forward(request, response);
 			return;
 		}
 
 		// inserisco nel DB
 		Annuncio annuncioInstance = AnnuncioDTO.buildModelFromDto(annuncioDTO);
-		annuncioService.inserisciNuovo(annuncioInstance);
+		//true se l'aggiornamento ha avuto successo
+		boolean aggiornato = annuncioService.aggiornaSeAperto(annuncioInstance);
 
 		// vado in pagina con OK
 		request.setAttribute("listaAnnunciAttr", annuncioService.cercaTuttiDaUtenteId(utenteInSessione.getId()));
-		request.setAttribute("messaggioConferma", "Il tuo annuncio è stato inserito correttamente");
+		if(aggiornato) {
+			request.setAttribute("messaggioConferma", "Il tuo annuncio è stato modificato correttamente");
+		} else {
+			request.setAttribute("messaggioErrore", "L'annuncio è stato chiuso o è avvenuto un errore di transazione");
+			
+		}
 		request.getRequestDispatcher("/areariservata/imieiannunci/IMieiAnnunci.jsp").forward(request, response);
 	}
 

@@ -16,8 +16,6 @@ import org.springframework.web.context.support.SpringBeanAutowiringSupport;
 
 import it.gestioneannunci.dto.UtenteDTO;
 import it.gestioneannunci.model.Utente;
-import it.gestioneannunci.model.enumeration.StatoUtente;
-import it.gestioneannunci.service.RuoloService;
 import it.gestioneannunci.service.UtenteService;
 
 /**
