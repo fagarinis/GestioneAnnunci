@@ -15,7 +15,7 @@ import it.gestioneannunci.model.enumeration.StatoUtente;
 
 @Service
 public class UtenteServiceImpl implements UtenteService {
-	
+
 	private static final Long idUtenteClassico = 2L;
 
 	@Autowired
@@ -84,7 +84,7 @@ public class UtenteServiceImpl implements UtenteService {
 		utenteUpdate.setEmail(utenteModel.getEmail());
 		utenteUpdate.setCreditoResiduo(utenteModel.getCreditoResiduo());
 		utenteUpdate.setStato(utenteModel.getStato());
-		
+
 		utenteUpdate.getRuoli().clear();
 		for (String idRuolo : listaIdRuoli) {
 			Ruolo ruoloDaAggiungere = ruoloDAO.get(Long.parseLong(idRuolo));
@@ -96,9 +96,22 @@ public class UtenteServiceImpl implements UtenteService {
 
 	@Transactional
 	@Override
-	public void inserisciNuovoUtenteClassico(Utente utenteInstance) {
-		utenteInstance.setDataCreazione(new Date());
+	public void inserisciNuovoUtenteConRuoli(Utente utenteInstance, List<String> listaIdRuoli) {
 		utenteInstance.setStato(StatoUtente.ATTIVO);
+		utenteInstance.setDataCreazione(new Date());
+		utenteDAO.insert(utenteInstance);
+		for (String idRuolo : listaIdRuoli) {
+			Ruolo ruoloDaAggiungere = ruoloDAO.get(Long.parseLong(idRuolo));
+			if (ruoloDaAggiungere != null)
+				utenteInstance.addRuolo(ruoloDaAggiungere);
+		}
+	}
+
+	@Transactional
+	@Override
+	public void inserisciNuovoUtenteClassico(Utente utenteInstance) {
+		utenteInstance.setStato(StatoUtente.ATTIVO);
+		utenteInstance.setDataCreazione(new Date());
 		utenteDAO.insert(utenteInstance);
 		utenteInstance.addRuolo(new Ruolo(idUtenteClassico));
 	}
@@ -108,7 +121,7 @@ public class UtenteServiceImpl implements UtenteService {
 	public boolean isUsernameDiponibile(String username) {
 		return utenteDAO.findByUsername(username) == null;
 	}
-	
+
 	@Transactional(readOnly = true)
 	@Override
 	public Utente cercaDaUsername(String username) {

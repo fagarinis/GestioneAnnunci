@@ -22,4 +22,6 @@ public interface UtenteService extends IBaseService<Utente> {
 
 	public Utente cercaDaUsername(String username);
 
+	public void inserisciNuovoUtenteConRuoli(Utente utenteInstance, List<String> listaIdRuoli);
+
 }

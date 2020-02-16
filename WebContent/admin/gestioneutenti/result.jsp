@@ -67,8 +67,11 @@
 		<div class="form-group">
 			<div class="col-sm-offset-2 col-sm-10">
 		
-				<a	href="javascript:history.back()" class="btn btn-primary btn-md">Torna
-					Indietro</a>
+		<!-- Nuova ricerca -->
+				<a	href="${pageContext.request.contextPath}/admin/gestioneutenti/PrepareSearchUtenteServlet" class="btn btn-primary btn-md">Nuova Ricerca</a>
+			<!-- Inserisci nuovo Utente -->
+		        <a href="${pageContext.request.contextPath}/admin/gestioneutenti/PrepareInsertUtenteServlet" class="btn btn-primary btn-md">Inserisci Nuovo Utente</a>
+		      
 			</div>
 		</div>
 

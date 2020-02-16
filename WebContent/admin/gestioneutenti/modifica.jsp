@@ -70,11 +70,14 @@
 			 	</div>
   			</div>
   			
+  			<input class="form-control" type="hidden" id="creditoResiduoOriginaleInputId" name="creditoResiduoOriginaleInput" 
+					value = "${creditoResiduoOriginaleInput}">
+  			
   			<div class="form-group">
-      			<label class="control-label col-sm-2" for="creditoResiduoInputId">Credito Residuo:</label>
+      			<label class="control-label col-sm-2" for="creditoResiduoInputId">Credito Residuo (Attuale: ${creditoResiduoOriginaleInput} &euro;):</label>
 	    		<div class="col-sm-4">
 					<input class="form-control" type="text" id="creditoResiduoInputId" name="creditoResiduoInput" 
-					value = "${utenteAttr.creditoResiduo}">
+					value = "${utenteAttr.creditoResiduo == null? creditoResiduoOriginaleInput: utenteAttr.creditoResiduo}">
 			 	</div>
   			</div>
   			

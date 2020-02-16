@@ -12,26 +12,20 @@ import javax.servlet.http.HttpServletResponse;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.context.support.SpringBeanAutowiringSupport;
 
-import it.gestioneannunci.model.Utente;
 import it.gestioneannunci.model.enumeration.StatoUtente;
 import it.gestioneannunci.service.RuoloService;
-import it.gestioneannunci.service.UtenteService;
-
 
 
 /**
- * Servlet implementation class PrepareModificaUtenteServlet
+ * Servlet implementation class PrepareInsertUtenteServlet
  */
-@WebServlet("/admin/gestioneutenti/PrepareModificaUtenteServlet")
-public class PrepareModificaUtenteServlet extends HttpServlet {
+@WebServlet("/admin/gestioneutenti/PrepareInsertUtenteServlet")
+public class PrepareInsertUtenteServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
 	@Autowired
 	private RuoloService ruoloService;
-	
-	@Autowired
-	private UtenteService utenteService;
-	
+
 	@Override
 	public void init(ServletConfig config) throws ServletException {
 		super.init(config);
@@ -41,7 +35,7 @@ public class PrepareModificaUtenteServlet extends HttpServlet {
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public PrepareModificaUtenteServlet() {
+    public PrepareInsertUtenteServlet() {
         super();
     }
 
@@ -49,22 +43,18 @@ public class PrepareModificaUtenteServlet extends HttpServlet {
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		
 		request.setAttribute("ruoliListAttr", ruoloService.listAll());
-		String idUtenteDaPagina = request.getParameter("idUtente");
 		request.setAttribute("statiListAttr", StatoUtente.values());
-		Utente utenteCaricato = utenteService.caricaSingoloUtenteEager(Long.parseLong(idUtenteDaPagina));
-		request.setAttribute("utenteAttr", utenteCaricato);
-		request.setAttribute("creditoResiduoOriginaleInput", utenteCaricato.getCreditoResiduo());
-
+		request.getRequestDispatcher("/admin/gestioneutenti/insert.jsp").forward(request, response);
 		
-		
-		request.getRequestDispatcher("/admin/gestioneutenti/modifica.jsp").forward(request, response);
 	}
 
 	/**
 	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		doGet(request, response);
 	}
 
 }

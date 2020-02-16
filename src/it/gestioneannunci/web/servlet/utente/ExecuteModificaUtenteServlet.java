@@ -1,8 +1,6 @@
 package it.gestioneannunci.web.servlet.utente;
 
 import java.io.IOException;
-import java.util.Arrays;
-import java.util.Date;
 import java.util.List;
 
 import javax.servlet.ServletConfig;
@@ -71,6 +69,8 @@ public class ExecuteModificaUtenteServlet extends HttpServlet {
 		String creditoResiduoInput = request.getParameter("creditoResiduoInput");
 		String[] idRuoliInputChecked = request.getParameterValues("ruoloInput");
 		String statoInput = request.getParameter("statoInput");
+		
+		
 
 		// validazione
 		UtenteDTO utenteDTO = new UtenteDTO();
@@ -98,6 +98,7 @@ public class ExecuteModificaUtenteServlet extends HttpServlet {
 			request.setAttribute("listaRuoliCheckedAttr", utenteDTO.getIdRuoli());
 			request.setAttribute("statiListAttr", StatoUtente.values());
 			request.setAttribute("ruoliListAttr", ruoloService.listAll());
+			request.setAttribute("creditoResiduoOriginaleInput", request.getParameter("creditoResiduoOriginaleInput"));
 
 			request.getRequestDispatcher("/admin/gestioneutenti/modifica.jsp").forward(request, response);
 			return;

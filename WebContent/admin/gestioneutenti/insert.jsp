@@ -27,11 +27,9 @@
       	</c:forEach>
 	</div>
 
-
-
-
-
-      	<form class="form-horizontal" action="${pageContext.request.contextPath}/admin/ExecuteInsertUtenteServlet" method="post">
+		
+      	<form class="form-horizontal" action="${pageContext.request.contextPath}/admin/gestioneutenti/ExecuteInsertUtenteServlet" method="post">
+      		
       		<div class="form-group">
       			<label class="control-label col-sm-2" for="nomeInputId">Nome:</label>
 	    		<div class="col-sm-4">
@@ -63,10 +61,46 @@
   			</div>
   			
   			<div class="form-group">
+      			<label class="control-label col-sm-2" for="confermaPasswordInputId">Conferma Password:</label>
+	    		<div class="col-sm-4">
+					<input class="form-control" type="password" id="confermaPasswordInputId" name="confermaPasswordInput" 
+					value = "${utenteAttr.confermaPassword}">
+			 	</div>
+  			</div>
+  			
+  			<div class="form-group">
+      			<label class="control-label col-sm-2" for="emailInputId">Email:</label>
+	    		<div class="col-sm-4">
+					<input class="form-control" type="text" id="emailInputId" name="emailInput" 
+					value = "${utenteAttr.email}">
+			 	</div>
+  			</div>
+  			
+  			<div class="form-group">
+      			<label class="control-label col-sm-2" for="creditoResiduoInputId">Credito Residuo:</label>
+	    		<div class="col-sm-4">
+					<input class="form-control" type="text" id="creditoResiduoInputId" name="creditoResiduoInput" 
+					value = "${utenteAttr.creditoResiduo}">
+			 	</div>
+  			</div>
+  			
+  			<div class="form-group">
+      			<label class="control-label col-sm-2" for="statoInputId">Stato Utente:</label>
+	    		<div class="col-sm-4">
+					<select id="statoInputId" name ="statoInput">
+  						<c:forEach var = "statoItem" items ="${statiListAttr}">
+  							<option  value = "${statoItem}" ${statoItem == utenteAttr.stato?"selected='selected'":''} >${statoItem}</option>
+  						</c:forEach>
+  					</select>
+			 	</div>
+  			</div>
+  			
+  			
+  			<div class="form-group">
       			<label class="control-label col-sm-2" for="ruoliInputId">Ruoli:</label>
 	    		<div class="col-sm-4">
+	    		
 	    			<c:forEach var = "ruoloItem" items ="${ruoliListAttr}">
-	    			
 	    				<c:forEach var ="utenteRuoloItem" items ="${utenteAttr.ruoli}">
 	    					<c:if test="${ruoloItem.id == utenteRuoloItem.id}">
 	    						<c:set var = "check" value ="yes"/>
@@ -79,16 +113,16 @@
 					</c:forEach>
 			 	</div>
   			</div>
-  			
-  			
-  			<div class="form-group">        
+
+		<div class="form-group">        
 		      <div class="col-sm-offset-2 col-sm-10">
-		        <button type="submit" class="btn btn-primary btn-md">Conferma</button>
+		        <button type="submit" class="btn btn-primary btn-md">Conferma Inserimento</button>
 		      </div>
 		    </div>
 		</form>
-		<%@ include file="../../footer.jsp"%>
     </div><!-- /.container -->
+    
+    <%@ include file="../../footer.jsp"%>
 
 
 

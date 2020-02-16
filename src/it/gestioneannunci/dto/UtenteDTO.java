@@ -2,7 +2,6 @@ package it.gestioneannunci.dto;
 
 import java.util.ArrayList;
 import java.util.Arrays;
-import java.util.Date;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
@@ -12,6 +11,7 @@ import org.apache.commons.lang.StringUtils;
 import it.gestioneannunci.model.Ruolo;
 import it.gestioneannunci.model.Utente;
 import it.gestioneannunci.model.enumeration.StatoUtente;
+import it.gestioneannunci.model.utils.ValutaUtils;
 
 public class UtenteDTO {
 
@@ -92,7 +92,7 @@ public class UtenteDTO {
 	}
 
 	public void setCreditoResiduo(Double creditoResiduo) {
-		this.creditoResiduo = creditoResiduo;
+		this.creditoResiduo = ValutaUtils.round(creditoResiduo, 2);
 	}
 
 	public StatoUtente getStato() {
@@ -187,7 +187,7 @@ public class UtenteDTO {
 
 	public void setCreditoResiduo(String creditoResiduoInput) {
 		try {
-			this.creditoResiduo = Double.parseDouble(creditoResiduoInput);
+			this.setCreditoResiduo(Double.parseDouble(creditoResiduoInput));
 		} catch (Exception e) {
 			this.creditoResiduo = null;
 		}

@@ -13,7 +13,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.context.support.SpringBeanAutowiringSupport;
 
 import it.gestioneannunci.model.Utente;
-import it.gestioneannunci.model.enumeration.StatoUtente;
 import it.gestioneannunci.service.UtenteService;
 
 /**
