@@ -1,5 +1,8 @@
 package it.gestioneannunci.model;
 
+import java.text.DateFormat;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.HashSet;
 import java.util.Set;
@@ -112,6 +115,20 @@ public class Utente {
 
 	public Date getDataCreazione() {
 		return dataCreazione;
+	}
+	
+	public Date getDataCreazioneSimpleFormat() {
+		DateFormat formatter = new SimpleDateFormat("dd/MM/yyyy");
+		Date date = this.dataCreazione;
+		Date dateWithZeroTime = null;
+		try {
+			dateWithZeroTime = formatter.parse(formatter.format(date));
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		
+		return dateWithZeroTime;
 	}
 
 	public void setDataCreazione(Date dataCreazione) {

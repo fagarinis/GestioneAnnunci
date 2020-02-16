@@ -1,4 +1,4 @@
-package it.gestioneannunci.web.servlet.utente;
+package it.gestioneannunci.web.servlet.areariservata;
 
 import java.io.IOException;
 import java.util.List;
@@ -9,6 +9,7 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.context.support.SpringBeanAutowiringSupport;
@@ -20,17 +21,14 @@ import it.gestioneannunci.service.RuoloService;
 import it.gestioneannunci.service.UtenteService;
 
 /**
- * Servlet implementation class ExecuteModificaUtenteServlet
+ * Servlet implementation class ExecuteModificaDaAreaRiservataUtenteServlet
  */
-@WebServlet("/admin/gestioneutenti/ExecuteModificaUtenteServlet")
-public class ExecuteModificaUtenteServlet extends HttpServlet {
+@WebServlet("/areariservata/ExecuteModificaDaAreaRiservataUtenteServlet")
+public class ExecuteModificaDaAreaRiservataUtenteServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 
 	@Autowired
 	private UtenteService utenteService;
-
-	@Autowired
-	private RuoloService ruoloService;
 
 	@Override
 	public void init(ServletConfig config) throws ServletException {
@@ -41,7 +39,7 @@ public class ExecuteModificaUtenteServlet extends HttpServlet {
 	/**
 	 * @see HttpServlet#HttpServlet()
 	 */
-	public ExecuteModificaUtenteServlet() {
+	public ExecuteModificaDaAreaRiservataUtenteServlet() {
 		super();
 	}
 
@@ -51,6 +49,7 @@ public class ExecuteModificaUtenteServlet extends HttpServlet {
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
+		response.getWriter().append("Served at: ").append(request.getContextPath());
 	}
 
 	/**
@@ -59,63 +58,49 @@ public class ExecuteModificaUtenteServlet extends HttpServlet {
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
+		
+		HttpServletRequest httpRequest = (HttpServletRequest) request;
+		Utente utenteInSession = (Utente) httpRequest.getSession().getAttribute("userInfo");
+		
 		// binding
-		String idInput = request.getParameter("idInput");
 		String nomeInput = request.getParameter("nomeInput");
 		String cognomeInput = request.getParameter("cognomeInput");
-		String emailInput = request.getParameter("emailInput");
-		String usernameInput = request.getParameter("usernameInput");
 		String passwordInput = request.getParameter("passwordInput");
-		String creditoResiduoInput = request.getParameter("creditoResiduoInput");
-		String[] idRuoliInputChecked = request.getParameterValues("ruoloInput");
-		String statoInput = request.getParameter("statoInput");
-		
-		
 
 		// validazione
 		UtenteDTO utenteDTO = new UtenteDTO();
-		utenteDTO.setId(Long.parseLong(idInput));
+		utenteDTO.setId(utenteInSession.getId());
 		utenteDTO.setNome(nomeInput);
 		utenteDTO.setCognome(cognomeInput);
-		utenteDTO.setEmail(emailInput);
-		utenteDTO.setUsername(usernameInput);
+		utenteDTO.setUsername(utenteInSession.getUsername());
+		utenteDTO.setCreditoResiduo(utenteInSession.getCreditoResiduo());
+		utenteDTO.setStato(utenteInSession.getStato());
+		utenteDTO.setEmail(utenteInSession.getEmail());
 		utenteDTO.setPassword(passwordInput);
 		utenteDTO.setConfermaPassword(passwordInput);
-		utenteDTO.setIdRuoli(idRuoliInputChecked);
-		utenteDTO.setStato(statoInput);
-		utenteDTO.setCreditoResiduo(creditoResiduoInput);
 
 		// verifica se ci sono errori, in caso ritorna indietro
 		List<String> utenteErrors = utenteDTO.errors();
-		Utente utenteConStessoUsername = utenteService.cercaDaUsername(utenteDTO.getUsername());
-		if (utenteConStessoUsername != null && utenteConStessoUsername.getId() != utenteDTO.getId()) {
-			utenteErrors.add("username non disponibile");
-		}
-		Utente utenteConStessaEmail = utenteService.cercaDaEmail(utenteDTO.getEmail());
-		if (utenteConStessaEmail != null && utenteConStessaEmail.getId() != utenteDTO.getId()) {
-			utenteErrors.add("L'email inserita è già in uso da un altro account");
-		}
-		
 		if (!utenteErrors.isEmpty()) {
-			utenteDTO.setRuoli(ruoloService.trovaDaListaId(utenteDTO.getIdRuoli()));
 			request.setAttribute("utenteAttr", utenteDTO);
 			request.setAttribute("utenteErrors", utenteErrors);
-			request.setAttribute("listaRuoliCheckedAttr", utenteDTO.getIdRuoli());
-			request.setAttribute("statiListAttr", StatoUtente.values());
-			request.setAttribute("ruoliListAttr", ruoloService.listAll());
-			request.setAttribute("creditoResiduoOriginaleInput", request.getParameter("creditoResiduoOriginaleInput"));
-
-			request.getRequestDispatcher("/admin/gestioneutenti/modifica.jsp").forward(request, response);
+			request.getRequestDispatcher("/areariservata/modifica.jsp").forward(request, response);
 			return;
 		}
 
 		// inserisco nel DB
-		utenteService.aggiornaUtenteConRuoli(UtenteDTO.buildModelFromDto(utenteDTO), utenteDTO.getIdRuoli());
+		Utente utenteUpdate = UtenteDTO.buildModelFromDto(utenteDTO);
+		utenteUpdate.setRuoli(utenteInSession.getRuoli());
+		utenteUpdate.setDataCreazione(utenteInSession.getDataCreazione());
+		utenteService.aggiorna(utenteUpdate);
 
+		//aggiorno l'utente in sessione
+		HttpSession session = request.getSession();
+		session.setAttribute("userInfo", utenteUpdate);
+				
 		// vado in pagina con OK
-		request.setAttribute("listaUtentiAttr", utenteService.listAllEager());
 		request.setAttribute("messaggioConferma", "Modifica avvenuta con successo");
-		request.getRequestDispatcher("/admin/gestioneutenti/result.jsp").forward(request, response);
+		request.getRequestDispatcher("/areariservata/home.jsp").forward(request, response);
 	}
 
 }

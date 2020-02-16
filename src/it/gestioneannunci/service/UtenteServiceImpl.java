@@ -140,4 +140,10 @@ public class UtenteServiceImpl implements UtenteService {
 		return utenteDAO.findByExampleEager(example);
 	}
 
+	@Transactional(readOnly = true)
+	@Override
+	public Utente cercaDaEmail(String email) {
+		return utenteDAO.findByEmail(email);
+	}
+
 }

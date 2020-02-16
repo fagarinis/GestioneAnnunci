@@ -84,6 +84,10 @@ public class ExecuteRegistrazioneUtenteServlet extends HttpServlet {
 			utenteErrors.add("username non disponibile");
 		}
 		
+		if (utenteService.cercaDaEmail(utenteDTO.getEmail()) != null) {
+			utenteErrors.add("L'email inserita è già in uso da un altro account");
+		}
+		
 		if (!utenteErrors.isEmpty()) {
 			request.setAttribute("utenteAttr", utenteDTO);
 			request.setAttribute("utenteErrors", utenteErrors);

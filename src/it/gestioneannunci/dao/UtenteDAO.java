@@ -16,6 +16,8 @@ public interface UtenteDAO extends IBaseDAO<Utente> {
 
 	public List<Utente> findByExampleEager(Utente example);
 
-	Utente findByUsername(String username);
+	public Utente findByUsername(String username);
+
+	public Utente findByEmail(String email);
 
 }

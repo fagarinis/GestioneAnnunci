@@ -153,4 +153,15 @@ public class UtenteDAOImpl implements UtenteDAO {
 				Utente.class).getResultList();
 	}
 
+	@Override
+	public Utente findByEmail(String email) {
+		try {
+			return entityManager.createQuery("from Utente u where u.email ='" + email + "'", Utente.class)
+					.getSingleResult();
+
+		} catch (Exception e) {
+			return null;
+		}
+	}
+
 }
