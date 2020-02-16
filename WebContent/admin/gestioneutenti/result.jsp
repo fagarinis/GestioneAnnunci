@@ -43,7 +43,7 @@
 							<i>${utenteItem.username }</i>
 						</c:if>
 						<c:if test="${utenteItem.getStato() == 'DISABILITATO'}">
-							<del>${utenteItem.username }</del>
+							<del><font color="gray">${utenteItem.username }</font></del>
 						</c:if>
 						<c:if test="${utenteItem.getStato() == 'ATTIVO'}">
 							${utenteItem.username }

@@ -74,4 +74,9 @@ public class AnnuncioDAOImpl implements AnnuncioDAO {
 		return objectCriteria.list();
 	}
 
+	@Override
+	public List<Annuncio> findAllByUtenteId(long id) {
+		return em.createQuery("From Annuncio a where a.utente.id ='"+id+"'" , Annuncio.class).getResultList();
+	}
+
 }

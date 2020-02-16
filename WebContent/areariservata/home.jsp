@@ -50,8 +50,8 @@
 			</dl>
 			
 			<a href="${pageContext.request.contextPath}/areariservata/PrepareModificaDaAreaRiservataUtenteServlet" class="btn btn-primary btn-md">Modifica Dati Account</a>
-			<a href="javascript:history.back()" class="btn btn-primary btn-md">I Miei Acquisti</a>
-			<a href="javascript:history.back()" class="btn btn-primary btn-md">Gestione Annunci</a>
+			<a href="${pageContext.request.contextPath}/areariservata/ExecuteSearchAcquistoServlet" class="btn btn-primary btn-md">I Miei Acquisti</a>
+			<a href="${pageContext.request.contextPath}/areariservata/imieiannunci/ExecuteSearchIMieiAnnunciServlet" class="btn btn-primary btn-md">I Miei Annunci</a>
 			
 			
 		</div>

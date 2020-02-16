@@ -51,4 +51,10 @@ public class AnnuncioServiceImpl implements AnnuncioService {
 		return annuncioDAO.findByExample(example);
 	}
 
+	@Transactional(readOnly = true)
+	@Override
+	public List<Annuncio> cercaTuttiDaUtenteId(Long id) {
+		return annuncioDAO.findAllByUtenteId(id);
+	}
+
 }
