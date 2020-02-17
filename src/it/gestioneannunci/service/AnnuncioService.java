@@ -3,7 +3,6 @@ package it.gestioneannunci.service;
 import java.util.List;
 
 import it.gestioneannunci.model.Annuncio;
-import it.gestioneannunci.model.Categoria;
 
 public interface AnnuncioService extends IBaseService<Annuncio> {
 	

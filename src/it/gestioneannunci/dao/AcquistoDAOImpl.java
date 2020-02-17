@@ -14,8 +14,6 @@ import org.hibernate.type.Type;
 import org.springframework.stereotype.Component;
 
 import it.gestioneannunci.model.Acquisto;
-import it.gestioneannunci.model.Annuncio;
-import it.gestioneannunci.model.Utente;
 
 @Component
 public class AcquistoDAOImpl implements AcquistoDAO {

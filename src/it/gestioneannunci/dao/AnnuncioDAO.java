@@ -3,7 +3,6 @@ package it.gestioneannunci.dao;
 import java.util.List;
 
 import it.gestioneannunci.model.Annuncio;
-import it.gestioneannunci.model.Categoria;
 
 public interface AnnuncioDAO extends IBaseDAO<Annuncio> {
 
