@@ -13,6 +13,11 @@
 <body>
 
 	<div class="container">
+	
+		<%-- MESSAGGIO ACQUISTO EFFETTUATO --%>
+		<div class="alert alert-success ${messaggioConferma!=null?'':'d-none' }" role="alert">
+			${messaggioConferma}
+		</div>
 
 		<%@ include file="../../header.jsp"%>
 

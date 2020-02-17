@@ -63,8 +63,10 @@ public class ExecuteCompraAnnuncioServlet extends HttpServlet {
 		
 		if(acquistoEffettuato) {
 			request.setAttribute("listaAcquistiAttr", acquistoService.cercaTuttiDaUtenteId(utenteInSessione.getId()));
+			request.setAttribute("messaggioConferma", "Acquisto effettuato");
 			//aggiorno l'utente in sessione
 			HttpSession session = request.getSession();
+			
 			session.setAttribute("userInfo", utenteService.caricaSingoloUtenteEager(utenteInSessione.getId()));
 			request.getRequestDispatcher("/areariservata/storicoacquisti.jsp").forward(request, response);
 		
