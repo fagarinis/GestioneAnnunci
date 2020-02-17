@@ -61,6 +61,11 @@ public class CheckAuthFilter implements Filter {
 				HttpSession session = ((HttpServletRequest) request).getSession();
 				session.setAttribute("lastPathBeforeLogin", lastPathBeforeLogin);
 				
+				//salvo l'id dell'annuncio che volevo comprare se la pagina prima del login era un "Compra"
+				if(request.getParameter("idAnnuncioBuy") != null) {
+				session.setAttribute("lastBuyIdBeforeLogin", request.getParameter("idAnnuncioBuy"));
+				}
+				
 				//se non e' in sessione lo rimando alla pagina login
 				httpResponse.sendRedirect(httpRequest.getContextPath()+"/login.jsp");
 				return;
@@ -107,7 +112,7 @@ public class CheckAuthFilter implements Filter {
 	 * ha succcesso. Se l'utente clicca su altri link, il path memorizzato viene cancellato
 	 */
 	private boolean isPathDeletingLastPathBeforeLogin(String path) {
-		if(path.contains("/js/") || path.contains("/css/")) {
+		if(path.contains("/js/") || path.contains("/css/") || path.contains(".ico")) {
 			return false;
 		}
 		if(path.contains("/login.jsp") || path.contains("/registrazione.jsp")) {

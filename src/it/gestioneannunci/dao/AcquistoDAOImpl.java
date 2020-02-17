@@ -14,6 +14,8 @@ import org.hibernate.type.Type;
 import org.springframework.stereotype.Component;
 
 import it.gestioneannunci.model.Acquisto;
+import it.gestioneannunci.model.Annuncio;
+import it.gestioneannunci.model.Utente;
 
 @Component
 public class AcquistoDAOImpl implements AcquistoDAO {
@@ -72,6 +74,11 @@ public class AcquistoDAOImpl implements AcquistoDAO {
 
 		objectCriteria.add(objectExample);
 		return objectCriteria.list();
+	}
+
+	@Override
+	public List<Acquisto> findAllByUserId(Long id) {
+		return em.createQuery("From Acquisto a where a.utente.id ='" + id + "'", Acquisto.class).getResultList();
 	}
 
 }

@@ -42,7 +42,7 @@
 						<td><a
 							href="${pageContext.request.contextPath}/ExecuteDettaglioAnnuncioDaRicercaServlet?idAnnuncio=${annuncioItem.id}"
 							class="btn btn-info">Visualizza</a> <a
-							href="${pageContext.request.contextPath}/areariservata/imieiannunci/PrepareModificaAnnuncioServlet?idAnnuncio=${annuncioItem.id}"
+							href="${pageContext.request.contextPath}/PrepareCompraAnnuncioServlet?idAnnuncioBuy=${annuncioItem.id}"
 							class="btn btn-info">Compra</a> 
 					</tr>
 				</c:forEach>

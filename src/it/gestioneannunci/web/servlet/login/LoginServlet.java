@@ -67,14 +67,18 @@ public class LoginServlet extends HttpServlet {
 		session.setAttribute("userInfo", utenteCheAccede);
 		
 		if(session.getAttribute("lastPathBeforeLogin")!=null) {
+			
 			request.getRequestDispatcher((String) session.getAttribute("lastPathBeforeLogin")).forward(request, response);
 			session.removeAttribute("lastPathBeforeLogin");
+			
+			//elimino l'eventuale id dell'annuncio che volevo comprare prima del login
+			session.removeAttribute("lastBuyIdBeforeLogin");
 			return;
 		}
 		
 		
 		request.setAttribute("categorieAttr", categoriaService.listAll());
-		request.getRequestDispatcher("index.jsp").forward(request, response);
+		request.getRequestDispatcher("/index.jsp").forward(request, response);
 	}
 
 }
