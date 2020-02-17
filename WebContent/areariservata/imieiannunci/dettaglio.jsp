@@ -26,7 +26,7 @@
 			</dl>
 			<dl class="row">
 				<dt class="col-sm-3 text-right">Prezzo</dt>
-				<dd class="col-sm-9">${annuncioAttr.prezzo }</dd>
+				<dd class="col-sm-9">${annuncioAttr.prezzo } &euro;</dd>
 			</dl>
 			<dl class="row">
 				<dt class="col-sm-3 text-right">Stato</dt>

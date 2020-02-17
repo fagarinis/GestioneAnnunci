@@ -43,7 +43,7 @@
 				<c:forEach var="annuncioItem" items="${listaAnnunciAttr }">
 					<tr> 
 						<td>${annuncioItem.testoAnnuncio }</td>
-						<td>${annuncioItem.prezzo }</td>
+						<td>${annuncioItem.prezzo } &euro;</td>
 						<td>${annuncioItem.aperto? 'Aperto' : 'Chiuso' }</td>
 						
 						<td><a
