@@ -34,7 +34,7 @@
 						<td>${acquistoItem.descrizione }</td>
 						
 						<td><a
-							href="${pageContext.request.contextPath}/areariservata/imieiannunci/ExecuteDettaglioAnnuncioServlet?idAnnuncio=${annuncioItem.id}"
+							href="${pageContext.request.contextPath}/areariservata/ExecuteDettaglioAcquistoServlet?idAcquisto=${acquistoItem.id}"
 							class="btn btn-info">Visualizza</a>
 						 
 					</tr>
