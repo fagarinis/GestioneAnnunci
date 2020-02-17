@@ -3,6 +3,7 @@ package it.gestioneannunci.service;
 import java.util.List;
 
 import it.gestioneannunci.model.Annuncio;
+import it.gestioneannunci.model.Categoria;
 
 public interface AnnuncioService extends IBaseService<Annuncio> {
 	
@@ -17,5 +18,8 @@ public interface AnnuncioService extends IBaseService<Annuncio> {
 	 * @return true se l'aggiornamento ha successo
 	 */
 	public boolean aggiornaSeAperto(Annuncio o);
+	
+	public List<Annuncio> cercaTuttiDaTestoEIdCategorie(String testo, List<String> idCategorie);
+
 
 }

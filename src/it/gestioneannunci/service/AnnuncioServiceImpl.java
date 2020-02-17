@@ -157,4 +157,10 @@ public class AnnuncioServiceImpl implements AnnuncioService {
 		return true;
 	}
 
+	@Transactional(readOnly = true)
+	@Override
+	public List<Annuncio> cercaTuttiDaTestoEIdCategorie(String testo, List<String> idCategorie) {
+		return annuncioDAO.findAllByTextWithAndIdCategory(testo, idCategorie);
+	}
+
 }

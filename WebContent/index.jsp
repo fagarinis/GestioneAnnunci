@@ -27,14 +27,20 @@
   
    <%@ include file="header.jsp" %>
   
-
+		
     <div class="row">
+    
 
       <div class="col-lg-2">
+      
         <h1 class="my-4">Gestione Annunci</h1>
+        
         <div class="list-group">
+        <form method ="post" action="ExecuteSearchAnnuncioServlet" " >
+        
         <!-- dentro un for con var categoriaItem -->
         <p> Seleziona Categorie: </p>
+        
         <c:forEach var="categoriaItem" items="${categorieAttr}">
         <div>
         <input type="checkbox" id="categoriaInputId" name="categoriaInput" value ="${categoriaItem.id}"> ${categoriaItem.descrizione} 
@@ -54,7 +60,7 @@
 		
         <div class="card mt-4">
         
-         <form method ="post" action="ExecuteSearchAnnuncioServlet" class="form-inline" >
+         
          
         	<input name ="nomeAnnuncioInput" type="text" class="form-control" size ="89">
         	

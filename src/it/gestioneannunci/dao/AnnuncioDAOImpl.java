@@ -14,6 +14,7 @@ import org.hibernate.type.Type;
 import org.springframework.stereotype.Component;
 
 import it.gestioneannunci.model.Annuncio;
+import it.gestioneannunci.model.Categoria;
 
 @Component
 public class AnnuncioDAOImpl implements AnnuncioDAO {
@@ -87,6 +88,26 @@ public class AnnuncioDAOImpl implements AnnuncioDAO {
 		} catch (Exception e) {
 			return null;
 		}
+	}
+
+	@Override
+	public List<Annuncio> findAllByTextWithAndIdCategory(String title, List<String> idCategoryList) {
+		String q = "select a From Annuncio a left join a.categorie c where a.testoAnnuncio like '%" + title + "%' ";
+
+		for (int i = 0; i < idCategoryList.size(); i++) {
+			if (i == 0) {
+				q += " and (c.id =" + idCategoryList.get(i) + " ";
+			} else {
+				q += " or c.id =" + idCategoryList.get(i) + " ";
+			}
+
+			if (i == idCategoryList.size() - 1) {
+				q += ") ";
+			}
+
+		}
+
+		return em.createQuery(q, Annuncio.class).getResultList();
 	}
 
 }
