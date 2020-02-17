@@ -9,6 +9,7 @@ import org.springframework.transaction.annotation.Transactional;
 
 import it.gestioneannunci.dao.RuoloDAO;
 import it.gestioneannunci.dao.UtenteDAO;
+import it.gestioneannunci.model.Annuncio;
 import it.gestioneannunci.model.Ruolo;
 import it.gestioneannunci.model.Utente;
 import it.gestioneannunci.model.enumeration.StatoUtente;
@@ -144,6 +145,12 @@ public class UtenteServiceImpl implements UtenteService {
 	@Override
 	public Utente cercaDaEmail(String email) {
 		return utenteDAO.findByEmail(email);
+	}
+
+	@Transactional(readOnly = true)
+	@Override
+	public String cercaUsernameDaAnnuncio(Annuncio o) {
+		return utenteDAO.findUsernameByAnnuncio(o);
 	}
 
 }

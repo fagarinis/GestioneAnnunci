@@ -2,6 +2,7 @@ package it.gestioneannunci.dao;
 
 import java.util.List;
 
+import it.gestioneannunci.model.Annuncio;
 import it.gestioneannunci.model.Utente;
 
 public interface UtenteDAO extends IBaseDAO<Utente> {
@@ -19,5 +20,7 @@ public interface UtenteDAO extends IBaseDAO<Utente> {
 	public Utente findByUsername(String username);
 
 	public Utente findByEmail(String email);
+	
+	public String findUsernameByAnnuncio(Annuncio o);
 
 }

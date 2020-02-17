@@ -2,6 +2,7 @@ package it.gestioneannunci.service;
 
 import java.util.List;
 
+import it.gestioneannunci.model.Annuncio;
 import it.gestioneannunci.model.Utente;
 
 public interface UtenteService extends IBaseService<Utente> {
@@ -25,5 +26,7 @@ public interface UtenteService extends IBaseService<Utente> {
 	public void inserisciNuovoUtenteConRuoli(Utente utenteInstance, List<String> listaIdRuoli);
 
 	public Utente cercaDaEmail(String email);
+	
+	public String cercaUsernameDaAnnuncio(Annuncio o);
 
 }

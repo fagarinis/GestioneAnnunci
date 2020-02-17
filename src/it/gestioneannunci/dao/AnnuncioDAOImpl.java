@@ -92,7 +92,7 @@ public class AnnuncioDAOImpl implements AnnuncioDAO {
 
 	@Override
 	public List<Annuncio> findAllByTextWithAndIdCategory(String title, List<String> idCategoryList) {
-		String q = "select a From Annuncio a left join a.categorie c where a.testoAnnuncio like '%" + title + "%' ";
+		String q = "select a From Annuncio a left join a.categorie c where a.aperto=1 and a.testoAnnuncio like '%" + title + "%' ";
 
 		for (int i = 0; i < idCategoryList.size(); i++) {
 			if (i == 0) {

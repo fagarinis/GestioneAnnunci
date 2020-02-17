@@ -40,7 +40,7 @@
 						<td>${annuncioItem.prezzo }</td>
 						
 						<td><a
-							href="${pageContext.request.contextPath}/areariservata/imieiannunci/ExecuteDettaglioAnnuncioServlet?idAnnuncio=${annuncioItem.id}"
+							href="${pageContext.request.contextPath}/ExecuteDettaglioAnnuncioDaRicercaServlet?idAnnuncio=${annuncioItem.id}"
 							class="btn btn-info">Visualizza</a> <a
 							href="${pageContext.request.contextPath}/areariservata/imieiannunci/PrepareModificaAnnuncioServlet?idAnnuncio=${annuncioItem.id}"
 							class="btn btn-info">Compra</a> 
@@ -54,8 +54,6 @@
 		
 			<!-- Nuova ricerca -->
 				<a	href="${pageContext.request.contextPath}/admin/gestioneutenti/PrepareSearchUtenteServlet" class="btn btn-primary btn-md">Nuova Ricerca</a>
-			<!-- Inserisci nuovo Utente -->
-		        <a href="${pageContext.request.contextPath}/admin/gestioneutenti/PrepareInsertUtenteServlet" class="btn btn-primary btn-md">Inserisci Nuovo Utente</a>
 		      
 			</div>
 		</div>

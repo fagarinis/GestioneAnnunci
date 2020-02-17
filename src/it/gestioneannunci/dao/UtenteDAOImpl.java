@@ -15,6 +15,7 @@ import org.hibernate.criterion.Example.PropertySelector;
 import org.hibernate.type.Type;
 import org.springframework.stereotype.Component;
 
+import it.gestioneannunci.model.Annuncio;
 import it.gestioneannunci.model.Ruolo;
 import it.gestioneannunci.model.Utente;
 import it.gestioneannunci.model.enumeration.StatoUtente;
@@ -159,6 +160,17 @@ public class UtenteDAOImpl implements UtenteDAO {
 			return entityManager.createQuery("from Utente u where u.email ='" + email + "'", Utente.class)
 					.getSingleResult();
 
+		} catch (Exception e) {
+			return null;
+		}
+	}
+
+	@Override
+	public String findUsernameByAnnuncio(Annuncio o) {
+		try {
+			Utente utente = entityManager.createQuery("select distinct u from Utente u join u.annunci a where a.id =" + o.getId(), Utente.class)
+					.getSingleResult();
+			return utente.getUsername();
 		} catch (Exception e) {
 			return null;
 		}
