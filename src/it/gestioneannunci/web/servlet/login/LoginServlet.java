@@ -67,7 +67,7 @@ public class LoginServlet extends HttpServlet {
 		session.setAttribute("userInfo", utenteCheAccede);
 		
 		if(session.getAttribute("lastPathBeforeLogin")!=null) {
-			
+			System.out.println("Returning to: "+session.getAttribute("lastPathBeforeLogin"));
 			request.getRequestDispatcher((String) session.getAttribute("lastPathBeforeLogin")).forward(request, response);
 			session.removeAttribute("lastPathBeforeLogin");
 			

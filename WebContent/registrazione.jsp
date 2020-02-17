@@ -3,6 +3,8 @@
 <!DOCTYPE html>
 <html>
 <head>
+<script src = "validateUtente.js" ></script>
+
 <meta charset="ISO-8859-1">
 <title>Registrati</title>
 </head>
@@ -28,7 +30,7 @@
 
 
 
-      	<form class="form-horizontal" action="${pageContext.request.contextPath}/ExecuteRegistrazioneUtenteServlet" method="post">
+      	<form onsubmit ="return validateUtenteForm()" name="utenteForm" class="form-horizontal" action="${pageContext.request.contextPath}/ExecuteRegistrazioneUtenteServlet" method="post">
       		<div class="form-group">
       			<label class="control-label col-sm-2" for="nomeInputId">Nome:</label>
 	    		<div class="col-sm-4">
@@ -64,6 +66,7 @@
 	    		<div class="col-sm-4">
 					<input class="form-control" type="password" id="confermaPasswordInputId" name="confermaPasswordInput" 
 					value = "${utenteAttr.confermaPassword}">
+					<font color="red"><p id = "confermaPasswordTextId"></p></font>
 			 	</div>
   			</div>
   			
@@ -72,6 +75,7 @@
 	    		<div class="col-sm-4">
 					<input class="form-control" type="text" id="emailInputId" name="emailInput" 
 					value = "${utenteAttr.email}">
+					<font color="red"><p id = "emailTextId"></p></font>
 			 	</div>
   			</div>
   			

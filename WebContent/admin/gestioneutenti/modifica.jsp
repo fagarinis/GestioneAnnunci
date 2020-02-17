@@ -4,6 +4,7 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 <head>
+<script src = "validateUtente.js"></script>
 <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
 <title>Modifica Utente</title>
 <link rel="shortcut icon" href="${pageContext.request.contextPath}/favicon.ico" type="image/x-icon" />
@@ -28,7 +29,7 @@
 	</div>
 
 
-      	<form class="form-horizontal" action="${pageContext.request.contextPath}/admin/gestioneutenti/ExecuteModificaUtenteServlet" method="post">
+      	<form onsubmit ="return validateUtenteForm()" name="utenteForm" class="form-horizontal" action="${pageContext.request.contextPath}/admin/gestioneutenti/ExecuteModificaUtenteServlet" method="post">
       		<input class="form-control" type="hidden" id="idInputId" name="idInput" 
 					value = "${utenteAttr.id}">
       		
@@ -67,6 +68,7 @@
 	    		<div class="col-sm-4">
 					<input class="form-control" type="text" id="emailInputId" name="emailInput" 
 					value = "${utenteAttr.email}">
+					<font color="red"><p id = "emailTextId"></p></font>
 			 	</div>
   			</div>
   			
@@ -76,7 +78,7 @@
   			<div class="form-group">
       			<label class="control-label col-sm-2" for="creditoResiduoInputId">Credito Residuo (Attuale: ${creditoResiduoOriginaleInput} &euro;):</label>
 	    		<div class="col-sm-4">
-					<input class="form-control" type="text" id="creditoResiduoInputId" name="creditoResiduoInput" 
+					<input class="form-control" type="number" step="0.01" id="creditoResiduoInputId" name="creditoResiduoInput" 
 					value = "${utenteAttr.creditoResiduo == null? creditoResiduoOriginaleInput: utenteAttr.creditoResiduo}">
 			 	</div>
   			</div>

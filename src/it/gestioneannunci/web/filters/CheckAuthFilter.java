@@ -23,7 +23,7 @@ public class CheckAuthFilter implements Filter {
 	private static final String HOME_PATH = "";
 	private static final String[] EXCLUDED_URLS = { "/login.jsp", "/registrazione.jsp", "HomeActionServlet",
 			"/LoginServlet","ExecuteRegistrazioneUtenteServlet", "/LogoutServlet", "/css/", "/js/", "/ExecuteSearchAnnuncioServlet",
-			"/result.jsp", "/dettaglio.jsp", "/ExecuteDettaglioAnnuncioDaRicercaServlet"};
+			"/result.jsp", "/dettaglio.jsp", "/ExecuteDettaglioAnnuncioDaRicercaServlet", ".js"};
 	private static final String[] PROTECTED_URLS = { "/admin/" };
 
 	public CheckAuthFilter() {
@@ -112,7 +112,7 @@ public class CheckAuthFilter implements Filter {
 	 * ha succcesso. Se l'utente clicca su altri link, il path memorizzato viene cancellato
 	 */
 	private boolean isPathDeletingLastPathBeforeLogin(String path) {
-		if(path.contains("/js/") || path.contains("/css/") || path.contains(".ico")) {
+		if(path.contains("/js/") || path.contains("/css/") || path.contains(".ico") || path.contains(".js")) {
 			return false;
 		}
 		if(path.contains("/login.jsp") || path.contains("/registrazione.jsp")) {

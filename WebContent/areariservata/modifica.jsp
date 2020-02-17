@@ -4,6 +4,8 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 <head>
+<script src = "validateModificaIMieiDati.js"></script>
+
 <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
 <title>Modifica I Miei Dati</title>
 <link rel="shortcut icon" href="${pageContext.request.contextPath}/favicon.ico" type="image/x-icon" />
@@ -28,7 +30,7 @@
 	</div>
 
 
-      	<form class="form-horizontal" action="${pageContext.request.contextPath}/areariservata/ExecuteModificaDaAreaRiservataUtenteServlet" method="post">
+      	<form onsubmit ="return validateUtenteForm()" name ="utenteForm" class="form-horizontal" action="${pageContext.request.contextPath}/areariservata/ExecuteModificaDaAreaRiservataUtenteServlet" method="post">
       		
       		<div class="form-group">
       			<label class="control-label col-sm-2" for="nomeInputId">Nome:</label>

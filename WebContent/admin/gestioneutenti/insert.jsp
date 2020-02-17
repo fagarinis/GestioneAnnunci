@@ -4,6 +4,10 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 <head>
+
+<script src = "validateUtente.js"></script>
+
+
 <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
 <title>Inserisci Utente</title>
 <link rel="shortcut icon" href="${pageContext.request.contextPath}/favicon.ico" type="image/x-icon" />
@@ -28,7 +32,7 @@
 	</div>
 
 		
-      	<form class="form-horizontal" action="${pageContext.request.contextPath}/admin/gestioneutenti/ExecuteInsertUtenteServlet" method="post">
+      	<form onsubmit ="return validateUtenteForm()" name="utenteForm" class="form-horizontal" action="${pageContext.request.contextPath}/admin/gestioneutenti/ExecuteInsertUtenteServlet" method="post">
       		
       		<div class="form-group">
       			<label class="control-label col-sm-2" for="nomeInputId">Nome:</label>
@@ -65,6 +69,7 @@
 	    		<div class="col-sm-4">
 					<input class="form-control" type="password" id="confermaPasswordInputId" name="confermaPasswordInput" 
 					value = "${utenteAttr.confermaPassword}">
+					<font color="red"><p id = "confermaPasswordTextId"></p></font>
 			 	</div>
   			</div>
   			
@@ -73,13 +78,14 @@
 	    		<div class="col-sm-4">
 					<input class="form-control" type="text" id="emailInputId" name="emailInput" 
 					value = "${utenteAttr.email}">
+					<font color="red"><p id = "emailTextId"></p></font>
 			 	</div>
   			</div>
   			
   			<div class="form-group">
-      			<label class="control-label col-sm-2" for="creditoResiduoInputId">Credito Residuo:</label>
+      			<label class="control-label col-sm-2" for="creditoResiduoInputId">Credito Residuo Iniziale:</label>
 	    		<div class="col-sm-4">
-					<input class="form-control" type="text" id="creditoResiduoInputId" name="creditoResiduoInput" 
+					<input class="form-control" type="number" step="0.01" id="creditoResiduoInputId" name="creditoResiduoInput" 
 					value = "${utenteAttr.creditoResiduo}">
 			 	</div>
   			</div>

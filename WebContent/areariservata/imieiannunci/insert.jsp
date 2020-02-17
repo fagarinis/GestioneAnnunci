@@ -4,6 +4,7 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 <head>
+<script src = "validateAnnuncio.js"></script>
 <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
 <title>Inserisci Annuncio</title>
 <link rel="shortcut icon" href="${pageContext.request.contextPath}/favicon.ico" type="image/x-icon" />
@@ -28,7 +29,7 @@
 	</div>
 
 		
-      	<form class="form-horizontal" action="${pageContext.request.contextPath}/areariservata/imieiannunci/ExecuteInsertAnnuncioServlet" method="post">
+      	<form onsubmit ="return validateAnnuncioForm()" name ="annuncioForm" class="form-horizontal" action="${pageContext.request.contextPath}/areariservata/imieiannunci/ExecuteInsertAnnuncioServlet" method="post">
       		
       		<div class="form-group">
       			<label class="control-label col-sm-2" for="testoAnnuncioInputId">Testo Annuncio:</label>
@@ -41,7 +42,7 @@
   			<div class="form-group">
       			<label class="control-label col-sm-2" for="prezzoInputId">Prezzo:</label>
 	    		<div class="col-sm-4">
-					<input class="form-control" type="text" id="prezzoInputId" name="prezzoInput" 
+					<input class="form-control" type="number" step="0.01" id="prezzoInputId" name="prezzoInput" 
 					value = "${annuncioAttr.prezzo}">
 			 	</div>
   			</div>

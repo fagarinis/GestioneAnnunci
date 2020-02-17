@@ -52,8 +52,6 @@
 		<div class="form-group">
 			<div class="col-sm-offset-2 col-sm-10">
 		
-			<!-- Nuova ricerca -->
-				<a	href="${pageContext.request.contextPath}/admin/gestioneutenti/PrepareSearchUtenteServlet" class="btn btn-primary btn-md">Nuova Ricerca</a>
 		      
 			</div>
 		</div>
