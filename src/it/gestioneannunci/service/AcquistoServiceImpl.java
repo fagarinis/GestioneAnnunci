@@ -82,10 +82,10 @@ public class AcquistoServiceImpl implements AcquistoService {
 		Utente utentePersist = utenteDAO.get(o.getId());
 		Double prezzo = annuncioPersist.getPrezzo();
 		
-		utentePersist.setCreditoResiduo(utentePersist.getCreditoResiduo()-prezzo);
+		
 		
 		//verifico se l'annuncio è ancora aperto e se l'utente ha credito residuo
-		if(!annuncioPersist.isAperto() || utentePersist.getCreditoResiduo() < 0) {
+		if(!annuncioPersist.isAperto() || utentePersist.getCreditoResiduo()-prezzo < 0) {
 			return false;
 		}
 		
@@ -100,6 +100,8 @@ public class AcquistoServiceImpl implements AcquistoService {
 		utentePersist.getAcquisti().add(acquistoResult);
 		acquistoResult.setUtente(utentePersist);
 		
+		utentePersist.setCreditoResiduo(utentePersist.getCreditoResiduo()-prezzo);
+		annuncioPersist.getUtente().setCreditoResiduo(annuncioPersist.getUtente().getCreditoResiduo()+prezzo);
 		acquistoDAO.insert(acquistoResult); //inserisco l'acquisto
 		return true;
 	}

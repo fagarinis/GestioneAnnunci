@@ -73,9 +73,8 @@ public class ExecuteCompraAnnuncioServlet extends HttpServlet {
 			Annuncio annuncio = annuncioService.caricaAnnuncioEager(idAnnuncio);
 			request.setAttribute("usernameAttr", utenteService.cercaUsernameDaAnnuncio(annuncio));
 			request.setAttribute("annuncioAttr", annuncio);
-			request.getRequestDispatcher("/acquisto.jsp").forward(request, response);
 			request.setAttribute("messaggioErrore", "Errore di transazione");
-			
+			request.getRequestDispatcher("/acquisto.jsp").forward(request, response);
 		}
 
 	}
